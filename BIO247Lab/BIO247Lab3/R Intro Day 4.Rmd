@@ -32,11 +32,7 @@ if (shirt=="red") {
 } else if (shirt=="yellow"){
   print("Eat banana")
 } else if (shirt=="green"){
-```
-
-
-```{r echo=FALSE}
-print("Eat spinach")
+  print("Eat spinach")
 } else if (shirt=="blue"){
   print ("Eat blueberries")
 } else {
