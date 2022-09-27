@@ -1,6 +1,8 @@
 #Script for Removing Junk LEEs: ORIGINAL
 #Whitney Domico BIO247 Lab 4
 
+#test comment for git
+
 #uploading and defining dataframe
 Lab4Data <- read.csv("C:\\Users\\Whitn\\OneDrive\\Desktop\\BIO247\\BIO247Lab\\BIO247Lab4\\MachineRead_output.csv", header=TRUE)
 
