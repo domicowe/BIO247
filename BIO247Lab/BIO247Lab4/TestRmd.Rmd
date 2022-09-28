@@ -1,0 +1,41 @@
+---
+title: "TestRmd"
+author: "Whitney Domico"
+date: "2022-09-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+for (each in Test_V_output$Paper.ID){
+  paperIDlength <- length(unlist(strsplit(Test_V_output$Paper.ID,",")))
+  Test_V_output$Paper.ID.Length[each] <- paperIDlength
+}
+  
+```
+
+```{r}
+Test_V_output$TestColumn3 <- with(Test_V_output, length(unlist(strsplit(Paper.ID, ","))))
+```
+
+```{r}
+transform(Test_V_output, TestColumn = length(unlist(strsplit(Paper.ID, ","))))
+```
+
+```{r}
+Test_V_output$Total.Score.binned <- cut(Test_V_output$Total.Score, c(0,140,240,340,440,540,640,750))
+```
+
+```{r}
+ggplot(Test_V_output)+ geom_bar(aes(x=Total.Score.binned))
+```
+
+```{r}
+sum(Test_V_output$Total.Score < 240) + sum(Test_V_output$Total.Score >=240) == length(Test_V_output$Total.Score)
+sum(Test_V_output$Total.Score <750)
+length(Test_V_output$Total.Score)
+```
+
