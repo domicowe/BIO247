@@ -8,6 +8,13 @@ date: "2022-09-20"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+get files for this rmd
+
+```{r}
+Test_V_output <- read.csv("C:\\Users\\Whitn\\OneDrive\\Desktop\\BIO247\\BIO247Lab\\BIO247Lab3\\Test_V_output.csv")
+TestData <- read.csv("C:\\Users\\Whitn\\OneDrive\\Desktop\\BIO247\\BIO247Lab\\BIO247Lab2\\Dataset_S1.txt")
+```
+
 ## Exercise 1: Rows and Columns
 
 The goal for this exercise is to save the Total Scores column into a vector and then find the 'Total Score' and molecules involved in the interaction for the user's "favorite row," which for these purposes will be defined as row 17.
@@ -200,13 +207,13 @@ for (each in vect1){
 to plot a dataframe column density
 
 ```{r include=TRUE}
-ggplot(Test_V_output)+ geom_density(aes(x=Total.Score, fill="red"))
+ggplot(Test_V_output)+ geom_density(aes(x=Total.Score), fill="black")
 ```
 
 to plot a dataframe column density with specific restraints -- %in% = only; >, <, !=
 
 ```{r include=TRUE}
-ggplot(Test_V_output[Test_V_output$Total.Score > 140,])+ geom_density(aes(x=Total.Score, fill="red"))
+ggplot(Test_V_output[Test_V_output$Total.Score > 140,])+ geom_density(aes(x=Total.Score), fill="black")
 ggplot(TestData[TestData$total.SNPs >70,])+geom_point(aes(x=total.SNPs, y=total.Bases))
 ```
 
@@ -226,7 +233,17 @@ OR
 new column name <- cut(column to be binned, c(x, y, z))
 
 ```{r include=TRUE}
-TestData$Divergence.binned2 <- cut(TestData$Divergence, c(-0.2, 0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 1.6))
+TestData$Divergence.binned2 <- cut(TestData$Divergence, c(0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 1.6))
+ggplot(TestData)+geom_bar(aes(Divergence.binned2))
+```
+
+## Counting Values
+
+find values within perimeters of a certain vector; sum != length
+```{r}
+sum(Test_V_output$Total.Score < 240) + sum(Test_V_output$Total.Score >=240) == length(Test_V_output$Total.Score)
+sum(Test_V_output$Total.Score)
+length(Test_V_output$Total.Score)
 ```
 
 ## Coding Diagrams
