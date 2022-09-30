@@ -10,15 +10,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-for (each in Test_V_output$Paper.ID){
-  paperIDlength <- length(unlist(strsplit(Test_V_output$Paper.ID,",")))
+for (each in 1:nrow(Test_V_output)){
+  paperIDlength <- length(unlist(strsplit(Test_V_output$Paper.ID[each],",")))
   Test_V_output$Paper.ID.Length[each] <- paperIDlength
 }
   
-```
-
-```{r}
-Test_V_output$TestColumn3 <- with(Test_V_output, length(unlist(strsplit(Paper.ID, ","))))
 ```
 
 ```{r}
@@ -37,5 +33,17 @@ ggplot(Test_V_output)+ geom_bar(aes(x=Total.Score.binned))
 sum(Test_V_output$Total.Score < 240) + sum(Test_V_output$Total.Score >=240) == length(Test_V_output$Total.Score)
 sum(Test_V_output$Total.Score <750)
 length(Test_V_output$Total.Score)
+```
+
+```{r}
+tot_score <- Test_V_output$Total.Score
+tot_score [20]
+Test_V_output[20,"Source.ID"]
+```
+
+```{r}
+test <- c("t","e","s","t")
+test2 <- c("test")
+("es") %in% test2
 ```
 
