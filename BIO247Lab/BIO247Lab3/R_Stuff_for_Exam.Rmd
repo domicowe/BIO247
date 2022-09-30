@@ -7,6 +7,11 @@ date: "2022-09-20"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+Bioinformatics -- biology, statistics, computer science
+
+robustness -- have they considered a third variable?
+
+reproducibility -- can this be copied?
 
 get files for this rmd
 
