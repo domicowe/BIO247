@@ -2,7 +2,6 @@
     <h1>BIO247 Class Materials</h1>
     <h5>This README describes the materials necessary for the Fall 2022 BIO247 Class.</h5>
 </section>
-
 <section>
 <h2>BIO247Lecture</h2>
 <p>Here lecture materials will be stored. These include:</p>
@@ -15,8 +14,7 @@
 <h6> 
 	<ul>
 		<ul>
-			<li>BIO247Exam1Download</li>
-			<li>BIO247DomicoExam1Submission</li> 
+			<li>DomicoExam1.pdf</li>
 		</ul>
 	</ul>
 </h6>
@@ -30,7 +28,10 @@
 	<ul>
 		<ul>
 			<li>BIO247Reading1</li>
-			<li>BIO247Reading1AuthorLastName</li> 
+            <ul>
+               <li>BIO247Reading1AuthorLastName</li>  
+               <li>BIO247Reading1SupplementalMaterial</li>
+            </ul>
 		</ul>
 	</ul>
 </h6>
@@ -44,17 +45,16 @@
 
 <section>
 <h2>BIO247Lab</h2>
-<p>Here lab submissions will be stored. These include lab protocols and submissions. The folders with the files inside are named by the following convention.</p>
+<p>Here lab submissions will be stored as well as relevant material used for the lab. The folders with the files inside are named by the following convention.</p>
 <h6> 
 	<ul>
 		<ul>
-			<li>BIO247Lab1</li>
-			<li>BIO247DomicoLab1Submission</li>
+			<li>BIO247DomicoLab1</li>
 		</ul>
 	</ul>
 </h6>
-	<p>"Dataset_S1.txt" can be found in the BIO247Lab2 folder. It contains data about SNPs on the human chromosome 20.</p>
 </section>
+
 
 <section>
 <h2>BIO247Project</h2>
