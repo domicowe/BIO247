@@ -68,7 +68,7 @@
 <h6> 
 	<ul>
         <ul>
-            <li>BIO247ProjectAuthorLastName</li>
+            <li>AuthorLastName_title_of_paper</li>
         </ul>
 	</ul>
 </h6>
@@ -86,6 +86,7 @@
 		</ul> 
 	</h6>
 </section>
+
 
 
 
