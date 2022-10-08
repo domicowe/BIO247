@@ -6,11 +6,12 @@ output: html_document
 ---
 
 
-"By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms."
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+"By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms." (answer = 4613732 )
+
 ```{r}  
 RS <- c(0)
 prev <- c(1)
@@ -29,11 +30,11 @@ while (fib < 4000000){
   }
 }
 
-
+print(RS)
 ```  
 
 
-"Find the largest palindrome made from the product of two 3-digit numbers."
+"Find the largest palindrome made from the product of two 3-digit numbers." (answer = 906609)
 
 ```{r}
 vec1 <- (999:100)
@@ -47,17 +48,16 @@ for (each in vec1){
  if (sum(temp3 == TRUE)==length(temp3)){
     if (temp[1]>pal[1]){
       pal <- temp
-      print(pal)
     }
  }
   }
 }
     
-  
+print(pal) 
 ```
 
 
-"What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?"
+"What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?" WORKS BUT INEFFICIENT (answer = 232792560)
 
 ```{r}
 vec4 <- (20000000:232792600)
@@ -92,7 +92,7 @@ stop <- FALSE
 while (stop == FALSE)
 ```
 
-"Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum."
+"Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum." (answer = 25164150)
 
 ```{r}
 vec1 <- 1:100
@@ -107,7 +107,7 @@ print(answer)
 
 ```
 
-"What is the 10 001st prime number?" DOES NOT WORK
+"What is the 10 001st prime number?" DOES NOT WORK (answer = 104743)
 
 ```{r}
 counter <- 0
@@ -169,7 +169,8 @@ for (each in vec1){
         
 ```
 
-"What is the 10 001st prime number?" WORKS BUT WHY?
+"What is the 10 001st prime number?" WORKS BUT WHY? (answer = 104743)
+
 ```{r}
 totalPrimes <- 0;
 currentPrime <- 0;
