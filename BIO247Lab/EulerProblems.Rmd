@@ -1,0 +1,201 @@
+---
+title: "EulerProblems"
+author: "Whitney Domico"
+date: "2022-10-08"
+output: html_document
+---
+
+
+"By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms."
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}  
+RS <- c(0)
+prev <- c(1)
+fib <- c(2)
+
+while (fib < 4000000){
+  if (fib %% 2 == 0){
+    RS <- RS + fib
+    temp <- fib
+    fib <- prev + fib
+    prev <- temp
+  } else {
+    temp <- fib
+    fib <- fib + prev
+    prev <- temp
+  }
+}
+
+
+```  
+
+
+"Find the largest palindrome made from the product of two 3-digit numbers."
+
+```{r}
+vec1 <- (999:100)
+pal <- c(0)
+
+for (each in vec1){
+  for (each2 in vec1){
+ temp <- each*each2
+ temp2 <- as.numeric(strsplit(as.character(temp),"")[[1]])
+ temp3 <-(temp2[1:length(temp2)] == temp2[length(temp2):1])
+ if (sum(temp3 == TRUE)==length(temp3)){
+    if (temp[1]>pal[1]){
+      pal <- temp
+      print(pal)
+    }
+ }
+  }
+}
+    
+  
+```
+
+
+"What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?"
+
+```{r}
+vec4 <- (20000000:232792600)
+vec5 <- (1:20)
+x <- 0
+stop <- FALSE
+answer2 <- 111111111110
+
+while (stop == FALSE){
+  for (each in vec4){
+    for (each2 in vec5){
+      x <- each %% each2 + x
+      }
+    if (x == 0){
+      if(each < answer2){
+      answer2 <- each
+      }
+      stop <- TRUE
+    }
+    x <- 0
+  }
+}
+
+print(answer2)
+```
+```{r}
+vec4 <- (100:10000)
+vec5 <- (1:10)
+x <- 0
+stop <- FALSE
+
+while (stop == FALSE)
+```
+
+"Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum."
+
+```{r}
+vec1 <- 1:100
+temp <- c()
+
+temp1 <- sum(vec1^2)
+temp2 <- (sum(vec1))^2
+
+answer<-temp2-temp1
+
+print(answer)
+
+```
+
+"What is the 10 001st prime number?" DOES NOT WORK
+
+```{r}
+counter <- 0
+vec1 <- c(2:150000)
+x <- 0
+is.wholenumber <- function(x, tol = .Machine$double.eps^0.5) {
+    abs(x - round(x)) < tol
+}
+
+
+for (each in vec1){
+  if (each %% 2 != 0 || each == 2){
+    x <- x + 1
+    if (each %% 3 != 0 || each == 3){     
+      x <- x + 1
+      if (each %% 4 != 0 || each == 4){
+        x <- x + 1
+        if (each %% 5 != 0 || each == 5){
+          x <- x + 1
+          if (each %% 6 != 0 || each == 6){
+            x <- x + 1
+            if (each %% 7 != 0 || each == 7){
+              x <- x + 1
+              if (each %% 8 != 0 || each == 8){
+                x <- x + 1
+                if (each %% 9 != 0 || each == 9){
+                  x <- x + 1
+                  if (each %% 10 != 0 || each == 10){
+                    x <- x + 1
+                    if (each %% 11 != 0 || each == 11){
+                      x <- x + 1
+                      if (each %% 12 != 0 || each == 12){
+                        x <- x + 1
+                      if (each %% 13 != 0 || each == 13){
+                        x <- x + 1
+                      if (x == 12 && is.wholenumber(sqrt(each)) == FALSE){
+                        counter <- counter + 1
+                        if (counter == 10001){
+                          prime <- each
+                          print(prime)
+                        }
+                        }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  x <- 0
+}
+
+          
+        
+```
+
+"What is the 10 001st prime number?" WORKS BUT WHY?
+```{r}
+totalPrimes <- 0;
+currentPrime <- 0;
+currentNumber <- 0;
+
+
+while (totalPrimes <= 10001) {
+  foundADividend <- FALSE;
+  
+  currentNumber <- currentNumber + 1;
+  
+  
+  for (x in 2:(as.integer(currentNumber/2)+1)) {
+    if (currentNumber %% x == 0 && currentNumber != x)
+    {
+      foundADividend <- TRUE;
+      break;
+    }
+  }
+  
+  if (foundADividend == FALSE) {
+    totalPrimes <- totalPrimes + 1;
+    currentPrime <- currentNumber;
+    
+  }  
+  
+}
+
+```
