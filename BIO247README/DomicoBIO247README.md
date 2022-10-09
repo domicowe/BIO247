@@ -42,7 +42,6 @@
 	</h4>
 <p>This folder is named "BIO247DueDates" and it contains both the BIO247 syllabus (named "BIO247Syllabus") and an excel file of Fall 2022 assignments (named "AssignmentsFall2022")</p>
 </section>
-
 <section>
 <h2>BIO247Lab</h2>
 <p>Here lab submissions will be stored as well as relevant material used for the lab. The folders with the files inside are named by the following convention.</p>
@@ -53,7 +52,11 @@
 		</ul>
 	</ul>
 </h6>
+<p>
+    There is also a folder called "ExtraFiles" that contains supplemental information about R. 
+    </p>
 </section>
+
 
 
 <section>
