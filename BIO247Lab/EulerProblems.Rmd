@@ -200,3 +200,59 @@ while (totalPrimes <= 10001) {
 }
 
 ```
+
+"There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+Find the product abc." (answer = 31875000)
+
+```{r}
+vecab <- c(1:700)
+vecc <- c(1)
+answer <- c()
+
+for (each in vecab){
+  for (each2 in vecab){
+    vecc <- sqrt(each^2 + each2^2)
+    if (vecc[1]+each+each2 == 1000){
+      product <- each*each2*vecc
+      print(product)
+    }
+  }
+}
+
+
+```
+
+"Find the sum of all the multiples of 3 or 5 below 1000." (answer = 233168)
+
+```{r}
+vec1 <- 3*(1:333)
+vec2 <- 5*(1:199)
+vec3 <- 15*(1:66)
+
+answer <- sum(vec1) + sum(vec2) - sum(vec3)
+
+print(answer)
+
+```
+"Find the sum of the digits in the number 100!"
+
+```{r}
+
+product <- function(vec){
+    out <- 1
+    for(i in 1:length(vec)){
+         out <- out*vec[i]
+    }
+    out
+}
+vec1 <- product(1:100)
+vec1 <- format(vec1, scientific = FALSE)
+
+vec1 <- as.numeric(strsplit(as.character(vec1),"")[[1]])
+
+vec2 <- sum(vec1)
+
+print(vec2)
+
+```
+
