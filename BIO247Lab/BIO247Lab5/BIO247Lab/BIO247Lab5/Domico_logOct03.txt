@@ -1,0 +1,119 @@
+commit 5a55696a51966f6bf11e0f390291f5398d5510d8
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Mon Oct 3 16:50:52 2022 -0400
+
+    initial commit
+
+commit 4b8fccb284eff8ca8108410dd1ea5baa0058a266
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Mon Oct 3 16:49:57 2022 -0400
+
+    added info to RmdLabNotebook and deleted because of spaces in name
+
+commit 12760b407f48a90a92c863c00a7dd098d85130d8
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Mon Oct 3 16:49:14 2022 -0400
+
+    renamed to RmdLabNotebook for clarity
+
+commit 8776080ea59cac2fb5ba8413c7bda3d86ca5d89f
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Mon Oct 3 16:32:31 2022 -0400
+
+    Rmd file for Exam I in BIO247
+
+commit 8ec65cfd9004c83b28f76c68d146ec5eccf7e98a
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Mon Oct 3 15:29:27 2022 -0400
+
+    initial commit
+
+commit aa7921865e0f5c1da7bd97b186cd5b429b083e33
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Fri Sep 30 16:26:12 2022 -0400
+
+    added section
+
+commit 23d38dd58bd066437ffa50815b1e0b30a76cbf43
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Fri Sep 30 16:25:27 2022 -0400
+
+    added section
+
+commit c3c58f3b5ac9c04257bcd41a717b6c30263812d8
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Wed Sep 28 11:38:27 2022 -0400
+
+    test Rmd for BIO247
+
+commit 193467dc2fcdf686bc4794c2e3947ab4b4cc2c59
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Wed Sep 28 11:06:48 2022 -0400
+
+    fixed parentheses in ggplots
+
+commit 7d5ebb7eb7fcf248ce0213eb9861f8263f786dd3
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Wed Sep 28 08:52:03 2022 -0400
+
+    Rmd file for BIO247 Exam 1
+
+commit 4b4f3c2ee9c1087776403538c4ecec53c06584d8
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Tue Sep 27 15:16:04 2022 -0400
+
+    BIO247 Lab 3 file
+
+commit a12e09c970b50b9c739a1dddb832b5e632fa7e0f
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Tue Sep 27 15:15:32 2022 -0400
+
+    fixed duplicate section
+
+commit 116b35510e75ae08d51569f27c4e958d21303a61
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Tue Sep 27 15:10:27 2022 -0400
+
+    cheat sheet for BIO247 exams
+
+commit 1f0aac274d453efe4138a846476727e5bde79514
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Tue Sep 27 15:09:21 2022 -0400
+
+    BIO247 Lab 4 markdown test for filtering scripts
+
+commit 7ff8b3cd8e7d0534c492342674d269721ae7a0dd
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Tue Sep 27 15:05:48 2022 -0400
+
+    BIO247 Lab 4 script user input
+
+commit 63366dd043e58b36468a4d5a41fdf0d3bdc72a3f
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Tue Sep 27 15:04:19 2022 -0400
+
+    removed git testing lines
+
+commit 91d5281f81a3a301113014a2b28e3d398b01d7f2
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Tue Sep 27 12:22:12 2022 -0400
+
+    ignore pdf files
+
+commit fa79a789a69d871cca6291673a713634ad4a99d9
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Tue Sep 27 12:10:37 2022 -0400
+
+    second test for git
+
+commit bce8bba7173b741060c103757bc7104d0a33573e
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Tue Sep 27 12:05:22 2022 -0400
+
+    added comment to test git
+
+commit ff87a713b9b7b1b0ad5031896aa1689b414dacad
+Author: Whitney Domico <whitney.domico@live.com>
+Date:   Tue Sep 27 11:59:34 2022 -0400
+
+    BIO247 Lab4 RScript for filtering Paper IDs

@@ -1,0 +1,302 @@
+---
+title: "EulerProblems"
+author: "Whitney Domico"
+date: "2022-10-08"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+"By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms." (answer = 4613732 )
+
+```{r}  
+RS <- c(0)
+prev <- c(1)
+fib <- c(2)
+
+while (fib < 4000000){
+  if (fib %% 2 == 0){
+    RS <- RS + fib
+    temp <- fib
+    fib <- prev + fib
+    prev <- temp
+  } else {
+    temp <- fib
+    fib <- fib + prev
+    prev <- temp
+  }
+}
+
+print(RS)
+```  
+
+
+"Find the largest palindrome made from the product of two 3-digit numbers." (answer = 906609)
+
+```{r}
+vec1 <- (999:100)
+pal <- c(0)
+
+for (each in vec1){
+  for (each2 in vec1){
+ temp <- each*each2
+ temp2 <- as.numeric(strsplit(as.character(temp),"")[[1]])
+ temp3 <-(temp2[1:length(temp2)] == temp2[length(temp2):1])
+ if (sum(temp3 == TRUE)==length(temp3)){
+    if (temp[1]>pal[1]){
+      pal <- temp
+    }
+ }
+  }
+}
+    
+print(pal) 
+```
+
+
+"What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?" WORKS BUT INEFFICIENT (answer = 232792560)
+
+```{r}
+vec4 <- (20000000:232792600)
+vec5 <- (1:20)
+x <- 0
+stop <- FALSE
+answer2 <- 111111111110
+
+while (stop == FALSE){
+  for (each in vec4){
+    for (each2 in vec5){
+      x <- each %% each2 + x
+      }
+    if (x == 0){
+      if(each < answer2){
+      answer2 <- each
+      }
+      stop <- TRUE
+    }
+    x <- 0
+  }
+}
+
+print(answer2)
+```
+```{r}
+vec4 <- (100:10000)
+vec5 <- (1:10)
+x <- 0
+stop <- FALSE
+
+while (stop == FALSE)
+```
+
+"Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum." (answer = 25164150)
+
+```{r}
+vec1 <- 1:100
+temp <- c()
+
+temp1 <- sum(vec1^2)
+temp2 <- (sum(vec1))^2
+
+answer<-temp2-temp1
+
+print(answer)
+
+```
+
+"What is the 10 001st prime number?" DOES NOT WORK (answer = 104743)
+
+```{r}
+counter <- 0
+vec1 <- c(2:150000)
+x <- 0
+is.wholenumber <- function(x, tol = .Machine$double.eps^0.5) {
+    abs(x - round(x)) < tol
+}
+
+
+for (each in vec1){
+  if (each %% 2 != 0 || each == 2){
+    x <- x + 1
+    if (each %% 3 != 0 || each == 3){     
+      x <- x + 1
+      if (each %% 4 != 0 || each == 4){
+        x <- x + 1
+        if (each %% 5 != 0 || each == 5){
+          x <- x + 1
+          if (each %% 6 != 0 || each == 6){
+            x <- x + 1
+            if (each %% 7 != 0 || each == 7){
+              x <- x + 1
+              if (each %% 8 != 0 || each == 8){
+                x <- x + 1
+                if (each %% 9 != 0 || each == 9){
+                  x <- x + 1
+                  if (each %% 10 != 0 || each == 10){
+                    x <- x + 1
+                    if (each %% 11 != 0 || each == 11){
+                      x <- x + 1
+                      if (each %% 12 != 0 || each == 12){
+                        x <- x + 1
+                      if (each %% 13 != 0 || each == 13){
+                        x <- x + 1
+                      if (x == 12 && is.wholenumber(sqrt(each)) == FALSE){
+                        counter <- counter + 1
+                        if (counter == 10001){
+                          prime <- each
+                          print(prime)
+                        }
+                        }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  x <- 0
+}
+
+          
+        
+```
+
+"What is the 10 001st prime number?" WORKS BUT WHY? (answer = 104743)
+
+```{r}
+totalPrimes <- 0;
+currentPrime <- 0;
+currentNumber <- 0;
+
+
+while (totalPrimes <= 10001) {
+  foundADividend <- FALSE;
+  
+  currentNumber <- currentNumber + 1;
+  
+  
+  for (x in 2:(as.integer(currentNumber/2)+1)) {
+    if (currentNumber %% x == 0 && currentNumber != x)
+    {
+      foundADividend <- TRUE;
+      break;
+    }
+  }
+  
+  if (foundADividend == FALSE) {
+    totalPrimes <- totalPrimes + 1;
+    currentPrime <- currentNumber;
+    
+  }  
+  
+}
+
+```
+
+"There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+Find the product abc." (answer = 31875000)
+
+```{r}
+vecab <- c(1:700)
+vecc <- c(1)
+answer <- c()
+
+for (each in vecab){
+  for (each2 in vecab){
+    vecc <- sqrt(each^2 + each2^2)
+    if (vecc[1]+each+each2 == 1000){
+      product <- each*each2*vecc
+      print(product)
+    }
+  }
+}
+
+
+```
+
+"Find the sum of all the multiples of 3 or 5 below 1000." (answer = 233168)
+
+```{r}
+vec1 <- 3*(1:333)
+vec2 <- 5*(1:199)
+vec3 <- 15*(1:66)
+
+answer <- sum(vec1) + sum(vec2) - sum(vec3)
+
+print(answer)
+
+```
+
+"Find the sum of the digits in the number 100!" (answer = 648) Note: R doesn't support this big of a number, so it's not exactly correct
+
+```{r}
+
+vec1 <- format(prod(1:100), scientific = FALSE)
+
+vec1 <- as.numeric(strsplit(as.character(vec1),"")[[1]])
+
+vec2 <- sum(vec1)
+
+print(vec2)
+
+```
+"How many distinct terms are in the sequence generated by a^b for 2 ≤ a ≤ 100 and 2 ≤ b ≤ 100?" (answer = 9183)
+
+```{r}
+veca <- c(2:100)
+vec1 <- c()
+
+for (each in veca){
+  for (each2 in veca){
+    temp <- each^each2
+    vec1 <- c(vec1, temp)
+  }
+}
+
+print(length(unique(vec1)))
+
+  
+```
+
+"Find the sum of all the numbers that can be written as the sum of fifth powers of their digits." (answer = 443839)
+
+```{r}
+vec1 <- c(4000:1000000)
+vec2 <- c()
+
+for (each in vec1){
+  temp <- as.numeric(strsplit(as.character(each),"")[[1]])
+  temp2 <- temp^5
+  if (sum(temp2) == each){
+    vec2 <- c(vec2, each)
+  }
+}
+print(sum(vec2))
+```
+"Considering natural numbers of the form, a^b, where a, b < 100, what is the maximum digital sum?" (answer = 972) DOESN"T WORK
+
+```{r}
+veca <- c(1:100)
+answer <- c(1)
+
+for (each in veca){
+  for (each2 in veca){
+    temp <- format(each^each2, scientific = FALSE)
+    temp2 <- as.numeric(strsplit(as.character(temp),"")[[1]])
+    temp3 <- sum(temp2)
+    if (temp3[1] > answer[1]){
+      answer <- temp3
+    }
+  }
+}
+print(answer)
+```
+
