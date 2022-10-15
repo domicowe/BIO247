@@ -300,3 +300,13 @@ for (each in veca){
 print(answer)
 ```
 
+Find the least number for which the proportion of bouncy numbers is exactly 99%.
+
+```{r}
+vec1 <- c(1:100000)
+
+for (each in vec1){
+  temp <- as.numeric(strsplit(as.character(each),"")[[1]])
+  
+```
+
