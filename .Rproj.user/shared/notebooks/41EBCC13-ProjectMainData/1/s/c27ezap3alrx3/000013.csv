@@ -1,0 +1,7 @@
+"0","temp <- PMC2775422_Data$Position.bp."
+"0","temp <- temp/1000000"
+"0","temp2 <- PMC3912837_Data$Position.bp/1000000"
+"0","temp3 <- PMC2890845_Data$Position.bp/1000000"
+"0","temp4 <- PMC3603134_Data$Position.bp/1000000"
+"0","temp5 <- PMC4724864_Data$BP/1000000"
+"0","Position.Mb <- c(PMC3077530_Data$Position.Mb., temp, temp2, temp3, temp4, temp5)"

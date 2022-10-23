@@ -1,0 +1,2 @@
+"0","MainData <- data.frame(SNP, Chr, Position.Mb, PMCID)"
+"0","View(MainData)"

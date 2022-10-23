@@ -1,0 +1,186 @@
+---
+title: "MakingDataFile"
+author: "Whitney Domico"
+date: "2022-10-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+importing data from sources
+```{r}
+library(readxl)
+PMC3077530_Data <- read.csv("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3077530_Data.txt", sep="", header = TRUE)
+PMC2775422_Data <- read.csv("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC2775422_Data.txt", sep="", header = TRUE)
+PMC3912837_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3912837_Data.xlsx",sheet = "Sheet2")
+PMC2890845_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC2890845_Data.xlsx")
+PMC3603134_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3603134_Data.xlsx", skip = 3)
+PMC4724864_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC4724864_Data.xlsx", skip = 1)
+```
+
+
+removing letters from end of PMC3077530$SNP data and combining with other data
+```{r}
+temp <- substr(PMC3077530_Data$SNP,1,nchar(PMC3077530_Data$SNP)-3)
+
+temp3 <- c()
+for (each in PMC3912837_Data$SNP){
+  temp2 <- unlist(strsplit(each, ""))
+  if ("*" %in% temp2){
+   temp3 <- c(temp3, (substr(each, 2, nchar(each))))
+  } else
+    temp3 <- c(temp3, each)
+}
+PMC3603134_Data$SNP <- c("-")
+SNP <- c(temp, PMC2775422_Data$SNP, temp3, PMC2890845_Data$`Tag SNP ID`, PMC3603134_Data$SNP, PMC4724864_Data$SNP)
+```
+
+splitting PMC2890845 and PMC3603134 CNVR into Chr and position
+```{r}
+temp4 <- c()
+for (each in PMC2890845_Data$CNVR) {
+  temp <- unlist(strsplit(each, ""))
+  temp2 <- c(temp[4:5])
+  if (":" %in% temp2 && "X" %in% temp2 == FALSE && "Y" %in% temp2 == FALSE && "x" %in% temp2 == FALSE && "y" %in% temp2 == FALSE){
+    temp3 <- paste0(0, temp2[1])
+    temp4 <- c(temp4, temp3)
+  } else if (":" %in% temp2){
+    temp4 <- c(temp4, temp2[1])
+  } else
+    temp5 <- paste0(temp2[1], temp2[2])
+    temp4 <- c(temp4, temp5)
+temp <- c()
+temp2 <- c()
+temp3 <- c()
+temp5 <- c()
+}
+PMC2890845_Data$Chr <- temp4
+
+temp4 <- c()
+for (each in PMC2890845_Data$CNVR) {
+  temp <- unlist(strsplit(each, ":"))
+  temp2 <- c(temp[2])
+  temp3 <- unlist(strsplit(temp2, "–"))
+  temp4 <- c(temp4, as.numeric(temp3[1]))
+  temp <- c()
+  temp2 <- c()
+  temp3 <- c()
+}
+PMC2890845_Data$Position.bp <- temp4
+
+temp4 <- c()
+for (each in PMC3603134_Data$...2) {
+  temp <- unlist(strsplit(each, ""))
+  temp2 <- c(temp[4:5])
+  if (":" %in% temp2 && "X" %in% temp2 == FALSE && "Y" %in% temp2 == FALSE && "x" %in% temp2 == FALSE && "y" %in% temp2 == FALSE){
+    temp3 <- paste0(0, temp2[1])
+    temp4 <- c(temp4, temp3)
+  } else if (":" %in% temp2){
+    temp4 <- c(temp4, temp2[1])
+  } else
+    temp5 <- paste0(temp2[1], temp2[2])
+    temp4 <- c(temp4, temp5)
+temp <- c()
+temp2 <- c()
+temp3 <- c()
+temp5 <- c()
+}
+PMC3603134_Data$Chr <- temp4
+
+temp4 <- c()
+for (each in PMC3603134_Data$...2) {
+  temp <- unlist(strsplit(each, ":"))
+  temp2 <- c(temp[2])
+  temp3 <- unlist(strsplit(temp2, "-"))
+  temp4 <- c(temp4, as.numeric(temp3[1]))
+  temp <- c()
+  temp2 <- c()
+  temp3 <- c()
+}
+PMC3603134_Data$Position.bp <- temp4
+```
+
+
+putting positions into equal units
+```{r}
+temp <- PMC2775422_Data$Position.bp.
+temp <- temp/1000000
+temp2 <- PMC3912837_Data$Position.bp/1000000
+temp3 <- PMC2890845_Data$Position.bp/1000000
+temp4 <- PMC3603134_Data$Position.bp/1000000
+temp5 <- PMC4724864_Data$BP/1000000
+Position.Mb <- c(PMC3077530_Data$Position.Mb., temp, temp2, temp3, temp4, temp5)
+```
+
+removing junk characters from Chr for PMC3912837; redefining 1 as 01, etc in PMC3077530 and defining Chr
+
+```{r}
+temp4 <- c()
+for (each in PMC3912837_Data$Chr) {
+  temp <- unlist(strsplit(each, ""))
+  temp2 <- c(temp[4:5])
+  if (":" %in% temp2 && "X" %in% temp2 == FALSE && "Y" %in% temp2 == FALSE && "x" %in% temp2 == FALSE && "y" %in% temp2 == FALSE){
+    temp3 <- paste0(0, temp2[1])
+    temp4 <- c(temp4, temp3)
+  } else if (":" %in% temp2){
+    temp4 <- c(temp4, temp2[1])
+  } else
+    temp5 <- paste0(temp2[1], temp2[2])
+    temp4 <- c(temp4, temp5)
+temp <- c()
+temp2 <- c()
+temp3 <- c()
+temp5 <- c()
+}
+
+
+Chr <- c()
+temp6 <- c(PMC3077530_Data$Chr, PMC2775422_Data$Chr, temp4, PMC2890845_Data$Chr, PMC3603134_Data$Chr, PMC4724864_Data$CHR)
+for (each in temp6){
+  temp7 <- unlist(strsplit(each, ""))
+  if (length(temp7) == 1 && "X" %in% temp7 == FALSE && "Y" %in% temp7 == FALSE && "x" %in% temp7 == FALSE && "y" %in% temp7 == FALSE) {
+    temp8 <- paste0(0, each)
+    Chr <- c(Chr, temp8)
+ } else 
+    Chr <- c(Chr, each)
+temp6 <- c()
+}
+```
+
+inserting PMCID columns for all data; defining PMCID
+
+```{r}
+PMC2890845_Data$PMCID <- c("PMC2890845")
+PMC3912837_Data$PMCID <- c("PMC3912837")
+PMC2775422_Data$PMCID <- c("PMC2775422")
+PMC3077530_Data$PMCID <- c("PMC3077530")
+PMC3603134_Data$PMCID <- c("PMC3603134")
+PMC4724864_Data$PMCID <- c("PMC4724864")
+
+PMCID <- c(PMC3077530_Data$PMCID, PMC2775422_Data$PMCID, PMC3912837_Data$PMCID, PMC2890845_Data$PMCID, PMC3603134_Data$PMCID, PMC4724864_Data$PMCID)
+```
+
+
+beginning new dataframe for all data
+```{r}
+MainData <- data.frame(SNP, Chr, Position.Mb, PMCID)
+View(MainData)
+```
+
+graph for fun
+```{r}
+library(ggplot2)
+ggplot(MainData)+geom_bar(aes(x=Chr))
+```
+
+
+```{r}
+length(unique(MainData$SNP))
+length(MainData$SNP)
+```
+
+
+
+
