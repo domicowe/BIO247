@@ -18,7 +18,7 @@
 "0",""
 "0",""
 "0","Chr <- c()"
-"0","temp6 <- c(PMC3077530_Data$Chr, PMC2775422_Data$Chr, temp4, PMC2890845_Data$Chr, PMC3603134_Data$Chr, PMC4724864_Data$CHR)"
+"0","temp6 <- c(PMC3077530_Data$Chr, PMC2775422_Data$Chr, temp4, PMC2890845_Data$Chr, PMC4724864_Data$CHR, PMC6927206_Data$CHR, PMC3872086_Data$Chr, PMC4059435_Data$Chr., PMC3905728_Data$Chromosome, PMC3827979_Data$Chr)"
 "0","for (each in temp6){"
 "0","  temp7 <- unlist(strsplit(each, """"))"
 "0","  if (length(temp7) == 1 && ""X"" %in% temp7 == FALSE && ""Y"" %in% temp7 == FALSE && ""x"" %in% temp7 == FALSE && ""y"" %in% temp7 == FALSE) {"

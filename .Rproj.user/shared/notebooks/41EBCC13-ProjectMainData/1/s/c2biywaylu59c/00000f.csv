@@ -8,5 +8,4 @@
 "0","  } else"
 "0","    temp3 <- c(temp3, each)"
 "0","}"
-"0","PMC3603134_Data$SNP <- c(""-"")"
-"0","SNP <- c(temp, PMC2775422_Data$SNP, temp3, PMC2890845_Data$`Tag SNP ID`, PMC3603134_Data$SNP, PMC4724864_Data$SNP)"
+"0","SNP <- c(temp, PMC2775422_Data$SNP, temp3, PMC2890845_Data$`Tag SNP ID`, PMC4724864_Data$SNP, PMC6927206_Data$SNP...1, PMC3872086_Data$SNP, PMC4059435_Data$SNP, PMC3905728_Data$`Strongest SNP`, PMC3827979_Data$`rs ID`)"
