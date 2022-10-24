@@ -1,0 +1,7 @@
+"0","fit <- nls(Conc_data$X.ProtD.~a*Conc_data$Time..ms./(b+Conc_data$Time..ms.), data=Conc_data, start=list(a=0.1,b=0.1))"
+"0","cor(Conc_data$X.ProtD., predict(fit))"
+"1","[1]"
+"1"," 0.9732824"
+"1","
+"
+"0","plot(Conc_data$Time..ms., Conc_data$X.ProtD., xlab= ""Time (ms)"", ylab=(""[Protein D]""), pch=19, col='purple')"

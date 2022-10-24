@@ -168,24 +168,70 @@ PMCID <- c(PMC3077530_Data$PMCID, PMC2775422_Data$PMCID, PMC3912837_Data$PMCID, 
 
 beginning new dataframe for all data
 ```{r}
-MainData <- data.frame(SNP, Chr, Position.Mb, PMCID)
-View(MainData)
+InitialData <- data.frame(SNP, Chr, Position.Mb, PMCID)
 ```
 
 
-graph for fun
 ```{r}
-library(ggplot2)
+length(unique(InitialData$SNP))
+length(InitialData$SNP)
+```
+
+making dataframe with only unique values of SNP (found setDT function on stack exchange)
+
+```{r}
+library(data.table)
+require(data.table)
+
+
+tempdf2 <- setDT(InitialData)[,.(Chr=paste(Chr,collapse = ",")), by=SNP]
+
+temp2 <- c()
+for (each in tempdf2$Chr){
+  temp <- unlist(strsplit(each, ","))
+  temp2 <- c(temp2, temp[1])
+}
+ 
+tempdf3 <- setDT(InitialData)[,.(Position.Mb=paste(Position.Mb,collapse = ",")), by=SNP]
+
+temp3 <- c()
+for (each in tempdf3$Position.Mb){
+  temp <- unlist(strsplit(each, ","))
+  temp3 <- c(temp3, temp[1])
+}
+ 
+tempdf4 <- setDT(InitialData)[,.(PMCID=paste(PMCID,collapse = ",")), by=SNP]
+
+MainData <- data.frame("SNP"= tempdf2$SNP, "Chr"=temp2, "Position.Mb"=temp3, "PMCID"=tempdf4$PMCID)
+
+```
+
+
+```{r}
+length(unique(MainData$SNP))==length(MainData$SNP)
+```
+
+
+```{r}
 ggplot(MainData)+geom_bar(aes(x=Chr))
 ```
-
-
-
 ```{r}
-length(unique(MainData$SNP))
-length(MainData$SNP)
+row <- c(1:length(MainData$SNP))
+chr6 <- c()
+for (each in row){
+  if (MainData[each,2]=="06"){
+    chr6 <- c(chr6, as.numeric(MainData[each,3]))
+  }
+}
+
+
 ```
 
 
-
+```{r}
+library(ggplot2)
+testdf <- data.frame("initial"= chr6)
+testdf$binnedchr6 <- cut(chr6, c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170))
+ggplot(testdf)+geom_bar(aes(x=binnedchr6))
+```
 

@@ -1,0 +1,7 @@
+"0","row <- c(1:length(MainData$SNP))"
+"0","chr6 <- c()"
+"0","for (each in row){"
+"0","  if (MainData[each,2]==""06""){"
+"0","    chr6 <- c(chr6, as.numeric(MainData[each,3]))"
+"0","  }"
+"0","}"

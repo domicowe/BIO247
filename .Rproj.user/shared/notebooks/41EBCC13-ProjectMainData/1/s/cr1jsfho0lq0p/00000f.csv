@@ -1,2 +1,1 @@
-"0","MainData <- data.frame(SNP, Chr, Position.Mb, PMCID)"
-"0","View(MainData)"
+"0","InitialData <- data.frame(SNP, Chr, Position.Mb, PMCID)"

@@ -1,19 +1,19 @@
 {
-    "id": "E77FFFB7",
+    "id": "45D436DC",
     "path": "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Lab/ExtraFiles/RmdLabNotebook.Rmd",
     "project_path": "BIO247Lab/ExtraFiles/RmdLabNotebook.Rmd",
     "type": "r_markdown",
     "hash": "4092912294",
     "contents": "",
     "dirty": false,
-    "created": 1666471321511.0,
+    "created": 1666651179289.0,
     "source_on_save": false,
-    "relative_order": 3,
+    "relative_order": 5,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "209,0",
-        "scrollLine": "0"
+        "cursorPosition": "261,27",
+        "scrollLine": "220"
     },
     "folds": "",
     "lastKnownWriteTime": 1665248493,
