@@ -1,0 +1,66 @@
+---
+title: "DomicoBIO247Lab6"
+author: "Whitney Domico"
+date: "2022-10-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+Conc_data <- read.csv("C:/Users/Whitn/Downloads/Conc_data.csv")
+```
+
+```{r}
+plot(Conc_data$Time..ms., Conc_data$X.ProtA.)
+```
+
+```{r}
+plot(Conc_data$Time..ms., Conc_data$X.ProtA., col.axis='white')
+```
+
+```{r}
+plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("[Protein A]"))
+```
+
+```{r}
+plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("[Protein A]"), pch=19, col='black')
+```
+
+```{r}
+plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("Concentration"), pch=19, col='black', ylim=c(0,40.5))
+points(Conc_data$Time..ms., Conc_data$X.ProtB., pch=19, col='orange')
+points(Conc_data$Time..ms., Conc_data$X.ProtC., pch=19, col='green')
+points(Conc_data$Time..ms., Conc_data$X.ProtD., pch=19, col='purple')
+```
+
+```{r}
+plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("Concentration"), pch=19, col='black', ylim=c(0,40.5), type='l', lwd=2.5)
+lines(Conc_data$Time..ms., Conc_data$X.ProtB., pch=19, col='orange', lwd=2.5)
+lines(Conc_data$Time..ms., Conc_data$X.ProtC., pch=19, col='green', lwd=2.5)
+lines(Conc_data$Time..ms., Conc_data$X.ProtD., pch=19, col='purple', lwd=2.5)
+legend('topleft', c("Protein A", "Protein B", "Protein C", "Protein D"), lty=1,lwd=2.5, col=c('black', 'orange', 'green', 'purple'))
+```
+
+```{r}
+old.par <- par(mfrow=c(2,2))
+plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("[Protein A]"), pch=19, col='black')
+plot(Conc_data$Time..ms., Conc_data$X.ProtB., xlab= "Time (ms)", ylab=("[Protein B]"), pch=19, col='orange')
+plot(Conc_data$Time..ms., Conc_data$X.ProtC., xlab= "Time (ms)", ylab=("[Protein C]"), pch=19, col='green')
+plot(Conc_data$Time..ms., Conc_data$X.ProtD., xlab= "Time (ms)", ylab=("[Protein D]"), pch=19, col='purple')
+par(old.par)
+```
+
+```{r}
+plot(Conc_data$Time..ms., Conc_data$X.ProtB., xlab= "Time (ms)", ylab=("[Protein B]"), pch=16, col='orange')
+abline(lm(Conc_data$X.ProtB. ~ Conc_data$Time..ms.), lwd=2)
+```
+```{r}
+fit <- nls(Conc_data$X.ProtD.~a*Conc_data$Time..ms./(b+Conc_data$Time..ms.), data=Conc_data, start=list(a=0.1,b=0.1))
+cor(Conc_data$X.ProtD., predict(fit))
+plot(Conc_data$Time..ms., Conc_data$X.ProtD., xlab= "Time (ms)", ylab=("[Protein D]"), pch=19, col='purple')
+lines(Conc_data$Time..ms., predict(fit), lwd=2)
+```
+

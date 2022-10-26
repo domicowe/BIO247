@@ -206,15 +206,70 @@ MainData <- data.frame("SNP"= tempdf2$SNP, "Chr"=temp2, "Position.Mb"=temp3, "PM
 
 ```
 
+checking to see if unique function worked
 
 ```{r}
 length(unique(MainData$SNP))==length(MainData$SNP)
 ```
-
+unadjusted frequency graph
 
 ```{r}
+library(ggplot2)
 ggplot(MainData)+geom_bar(aes(x=Chr))
 ```
+
+adjusted frequency graph 
+
+```{r}
+library(readxl)
+library(dplyr)
+library(ggplot2)
+ChrData <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/ChrData.xlsx")
+
+
+ObsData <- as.data.frame(table(MainData$Chr))
+
+ObsData$ChrBP <- ChrData$`Length (bp)`
+
+ObsData$AdjObs <- 10^7*(ObsData$Freq/ObsData$ChrBP)
+
+mean <- mean(ObsData$AdjObs)
+sd <- sd(ObsData$AdjObs)
+
+plot(x=ObsData$Var1, y=ObsData$AdjObs, xlab= "Chromosome", ylab=("Relative Frequency"), pch=19, col='black')
+
+ObsData$AdjObs.binned <- cut(ObsData$AdjObs, c(0, 0.5*sd, 1, 1.5*sd, 2.0*sd, 3.0*sd, 3.5*sd, 4*sd, 4.5*sd, 5*sd))
+
+ggplot(ObsData)+geom_bar(aes(x=AdjObs.binned))
+```
+
+Stat testing for adjusted frequency
+
+```{r}
+mean <- mean(ObsData$AdjObs)
+sd <- sd(ObsData$AdjObs)
+
+onesd <- 1+sd
+twosd <- 1+2*sd
+
+over68 <- c()
+over95 <- c()
+
+row <- c(1:length(ObsData$Var1))
+
+for (each in row){
+  if (ObsData[each,'AdjObs']> onesd && ObsData[each,'AdjObs'] < twosd){
+      over68 <- c(over68, ObsData[each,'Var1'])
+  } else if (ObsData[each,'AdjObs'] >= twosd){
+      over95 <- c(over95, ObsData[each,'Var1'] )
+  }
+}
+print(over68)
+print(over95)
+```
+
+chr6 more testing
+
 ```{r}
 row <- c(1:length(MainData$SNP))
 chr6 <- c()
@@ -224,14 +279,72 @@ for (each in row){
   }
 }
 
-
-```
-
-
-```{r}
 library(ggplot2)
 testdf <- data.frame("initial"= chr6)
 testdf$binnedchr6 <- cut(chr6, c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170))
 ggplot(testdf)+geom_bar(aes(x=binnedchr6))
+
+
+row <- c(1:length(MainData$SNP))
+chr6 <- c()
+SNP6 <- c()
+for (each in row){
+  if (MainData[each,2]=="06"){
+    if (MainData[each,3]>20 && MainData[each,3]<=30){
+      chr6 <- c(chr6, as.numeric(MainData[each,3]))
+      SNP6 <- c(SNP6, MainData[each, 'SNP'])
+    }
+  }
+}
+data.frame("SNP"=SNP6,"Position.bp"=chr6)
+
+library(readxl)
+library(IRanges)
+chr6gene <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/CHR6TABLE.xlsx",range = "a1:d65")
+chr6gene$endposapprox <- chr6gene$`Begin position in sequence` + 12000
+chr6gene$pos.Mb <- chr6gene$`Begin position in sequence`/1000000
+chr6gene$end.Mb <- chr6gene$endposapprox/1000000
+
+chr6pos <- IRanges(start=min(chr6), end=max(chr6))
+chr6genes <- IRanges(start=chr6gene$pos.Mb, end=chr6gene$end.Mb)
+
+findOverlaps(chr6pos, chr6genes)
+
+
+
 ```
+
+
+chr22 more testing
+
+```{r}
+row <- c(1:length(MainData$SNP))
+chr22 <- c()
+for (each in row){
+  if (MainData[each,2]=="22"){
+    chr22 <- c(chr22, as.numeric(MainData[each,3]))
+  }
+}
+library(ggplot2)
+testdf <- data.frame("initial"= chr22)
+testdf$binnedchr22 <- cut(chr22, c(0, 10, 20, 30, 40, 50))
+ggplot(testdf)+geom_bar(aes(x=binnedchr22))
+```
+chr11 more testing
+
+```{r}
+row <- c(1:length(MainData$SNP))
+chr11 <- c()
+for (each in row){
+  if (MainData[each,2]=="11"){
+    chr11 <- c(chr11, as.numeric(MainData[each,3]))
+  }
+}
+library(ggplot2)
+testdf <- data.frame("initial"= chr11)
+testdf$binnedchr11 <- cut(chr11, c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140))
+ggplot(testdf)+geom_bar(aes(x=binnedchr11))
+```
+```
+
 

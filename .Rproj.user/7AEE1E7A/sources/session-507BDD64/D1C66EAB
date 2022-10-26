@@ -3,9 +3,9 @@
     "path": "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/ProjectMainData.Rmd",
     "project_path": "BIO247Project/BIO247ProjectSubmissions/ProjectMainData.Rmd",
     "type": "r_markdown",
-    "hash": "3601153353",
+    "hash": "0",
     "contents": "",
-    "dirty": false,
+    "dirty": true,
     "created": 1666468213159.0,
     "source_on_save": false,
     "relative_order": 4,
@@ -13,16 +13,16 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "229,0",
-        "scrollLine": "180",
-        "last_setup_crc32": "BA681ED5bb338d19"
+        "cursorPosition": "245,0",
+        "scrollLine": "231",
+        "last_setup_crc32": "507BDD64bb338d19"
     },
     "folds": "",
-    "lastKnownWriteTime": 1666655827,
+    "lastKnownWriteTime": 1666795592,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1666655827332,
+    "last_content_update": 1666797388157,
     "read_only": false,
     "read_only_alternatives": []
 }
