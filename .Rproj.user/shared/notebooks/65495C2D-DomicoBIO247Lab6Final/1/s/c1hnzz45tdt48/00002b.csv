@@ -1,0 +1,1 @@
+"0","plot(Conc_data$Time..ms., Conc_data$X.ProtD., xlab= ""Time (ms)"", ylab=(""[Protein D]""),type='l', lty=1, col='purple')"

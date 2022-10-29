@@ -230,18 +230,36 @@ ChrData <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO2
 ObsData <- as.data.frame(table(MainData$Chr))
 
 ObsData$ChrBP <- ChrData$`Length (bp)`
+ObsData$Chr <- c(ObsData$Var1[1:23], "Y")
 
 ObsData$AdjObs <- 10^7*(ObsData$Freq/ObsData$ChrBP)
 
 mean <- mean(ObsData$AdjObs)
 sd <- sd(ObsData$AdjObs)
+mean1 <- rep(mean, 24)
+onesd <- rep(1+sd,24)
+twosd <- rep(1+2*sd, 24)
 
-plot(x=ObsData$Var1, y=ObsData$AdjObs, xlab= "Chromosome", ylab=("Relative Frequency"), pch=19, col='black')
+plot(x=ObsData$Var1, y=ObsData$AdjObs, xlab= "Chromosome", ylab=("Relative Frequency of SNP (AU)"), pch=19, col='black', type='p')
+lines(x=ObsData$Var1, y=mean1, lty=1)
+lines(x=ObsData$Var1, y=onesd, lty=2)
+lines(x=ObsData$Var1, y=twosd, lty=3)
+legend('topright', c("Population Mean", "One SD Above", "Two SD Above"), lty=c(1,2,3))
 
 ObsData$AdjObs.binned <- cut(ObsData$AdjObs, c(0, 0.5*sd, 1, 1.5*sd, 2.0*sd, 3.0*sd, 3.5*sd, 4*sd, 4.5*sd, 5*sd))
 
 ggplot(ObsData)+geom_bar(aes(x=AdjObs.binned))
 ```
+
+```{r}
+library(ggplot2)
+ggplot(ObsData, color= station, fill='black', aes(x=Var1, y=AdjObs))+
+  geom_col(position='dodge')+
+  ylab("Relative Frequency (AU)")+
+  xlab("Chromosome")
+
+```
+
 Stat testing for adjusted frequency
 
 ```{r}
@@ -289,7 +307,7 @@ chr6 <- c()
 SNP6 <- c()
 for (each in row){
   if (MainData[each,2]=="06"){
-    if (MainData[each,3]>20 && MainData[each,3]<=30){
+    if (MainData[each,3]>20 && MainData[each,3]<=40){
       chr6 <- c(chr6, as.numeric(MainData[each,3]))
       SNP6 <- c(SNP6, MainData[each, 'SNP'])
     }
@@ -307,9 +325,26 @@ chr6gene$end.Mb <- chr6gene$endposapprox/1000000
 chr6pos <- IRanges(start=min(chr6), end=max(chr6))
 chr6genes <- IRanges(start=chr6gene$pos.Mb, end=chr6gene$end.Mb)
 
-findOverlaps(chr6pos, chr6genes)
+chr6overlaps <- data.frame(findOverlaps(chr6pos, chr6genes))
+
+chr6potgenes <- c()
+for (each in chr6overlaps$subjectHits){
+  chr6potgenes <- c(chr6potgenes, chr6gene[each, 'Gene family'])
+}
+
+chr6potgenes
+
+test <- data.frame('start'=chr6, 'var1'=1)
+test2 <- data.frame('seq'=chr6gene$'Begin position in sequence'/1000000, 'var1' = 0.8)
 
 
+plot(test$start, test$var1, pch=19)
+points(test2$seq, test2$var1)
+
+```
+
+```{r}
+library(OutliersO3)
 
 ```
 

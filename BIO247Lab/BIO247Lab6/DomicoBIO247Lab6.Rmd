@@ -2,11 +2,17 @@
 title: "DomicoBIO247Lab6"
 author: "Whitney Domico"
 date: "2022-10-24"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+Conc_data <- read.csv("C:/Users/Whitn/Downloads/Conc_data.csv")
 ```
 
 ```{r}
@@ -53,9 +59,9 @@ par(old.par)
 plot(Conc_data$Time..ms., Conc_data$X.ProtB., xlab= "Time (ms)", ylab=("[Protein B]"), pch=16, col='orange')
 abline(lm(Conc_data$X.ProtB. ~ Conc_data$Time..ms.), lwd=2)
 ```
+
 ```{r}
 fit <- nls(Conc_data$X.ProtD.~a*Conc_data$Time..ms./(b+Conc_data$Time..ms.), data=Conc_data, start=list(a=0.1,b=0.1))
-cor(Conc_data$X.ProtD., predict(fit))
 plot(Conc_data$Time..ms., Conc_data$X.ProtD., xlab= "Time (ms)", ylab=("[Protein D]"), pch=19, col='purple')
 lines(Conc_data$Time..ms., predict(fit), lwd=2)
 ```
