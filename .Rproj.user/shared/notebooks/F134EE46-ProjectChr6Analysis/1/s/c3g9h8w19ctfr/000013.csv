@@ -1,0 +1,1 @@
+"0","chr6ranges <- IRanges(start=min(startpos), end=max(endpos))"

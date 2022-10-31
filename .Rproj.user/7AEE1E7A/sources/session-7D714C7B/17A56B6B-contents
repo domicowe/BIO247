@@ -1,0 +1,93 @@
+---
+title: "chr11analysis"
+author: "Whitney Domico"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+cleaning data from NCBI Chr 11 Homology 
+```{r} 
+Chr11DataNCBI <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/Chr11DataNCBI.xlsx")
+Chr11DataNCBI <- Chr11DataNCBI[,1:3]
+
+temp <- c()
+generang <- c()
+for (each in Chr11DataNCBI$`human position`){ 
+  temp <- unlist(strsplit(each, ':'))
+  temp2 <- temp[2]
+  temp3 <- unlist(strsplit(temp2, " "))
+  temp4 <- temp3[1]
+  generang <- c(generang, temp4)
+}
+
+Chr11DataNCBI$gene.range <- generang
+
+startpos <- c()
+endpos <- c()
+for (each in Chr11DataNCBI$gene.range){
+  temp <- unlist(strsplit(each, "-"))
+  temp2 <- gsub(",", "", temp) 
+  startpos <- c(startpos, as.numeric(temp2[1])/1000000)
+  endpos <- c(endpos, as.numeric(temp2[2])/1000000)
+}
+
+Chr11DataNCBI$startpos <- startpos
+Chr11DataNCBI$endpos <- endpos
+```
+
+
+finding most common SNP range
+
+```{r}
+row <- c(1:length(MainData$SNP))
+chr11 <- c()
+for (each in row){
+  if (MainData[each,2]=="11"){
+    chr11 <- c(chr11, as.numeric(MainData[each,3]))
+  }
+}
+library(ggplot2)
+testdf <- data.frame("initial"= chr11)
+testdf$binnedchr11 <- cut(chr11, c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140))
+ggplot(testdf)+geom_bar(aes(x=binnedchr11))
+
+row <- c(1:length(MainData$SNP))
+chr11 <- c()
+SNP11 <- c()
+for (each in row){
+  if (MainData[each,2]=="11"){
+    if (MainData[each,3]>50 && MainData[each,3]<=60){
+      chr11 <- c(chr11, as.numeric(MainData[each,3]))
+      SNP11 <- c(SNP11, MainData[each, 'SNP'])
+    }
+  }
+}
+data.frame("SNP"=SNP11,"Position.bp"=chr11)
+```
+
+
+finding potential genes
+
+```{r}
+potSNP11 <- c()
+potgenes11 <- c()
+row <- c(1:length(Chr11DataNCBI$startpos))
+for (each in chr11){
+  for (each2 in row){
+    if (each >= Chr11DataNCBI[each2,'startpos'] && each <= Chr11DataNCBI[each2,'endpos']){
+        potSNP11 <- c(potSNP11, each)
+        potgenes11 <- c(potgenes11, Chr11DataNCBI[each2,3])
+    }
+  }
+}
+unqpotgenes11<-unique(potgenes11)
+
+Chr11Genes <- data.frame(potSNP11)
+Chr11Genes$potgenes11 <- potgenes11
+View(Chr11Genes)
+```

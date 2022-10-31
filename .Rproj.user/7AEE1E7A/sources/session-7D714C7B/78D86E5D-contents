@@ -1,17 +1,85 @@
 ---
-title: "MakingDataFile"
+title: "BIO247 Lab 6"
 author: "Whitney Domico"
-date: "2022-10-22"
-output: html_document
+date: "`r Sys.Date()`"
+output:
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+https://www.ncbi.nlm.nih.gov/projects/homology/maps/human/chr6/
 ```
 
+```{r data, include=FALSE}
+Conc_data <- read.csv("C:/Users/Whitn/Downloads/Conc_data.csv")
+```
 
-importing data from sources
-```{r}
+**Figure 1.**
+
+The figure below shows the change in Protein A concentration over a 100ms time period. There appears to be little correlation, and therefore it could be suggested that Protein A has a constant concentration.
+
+```{r plot1, echo=FALSE}
+plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("[Protein A]"), pch=19, col='black')
+```
+
+**Figure 2.**
+
+The figure below shows the change in concentration of four proteins (Protein A, Protein B, Protein C, Protein D) over a 100ms time period. The proteins are represented by scatterplots in colors black, orange, green, and purple, respectively. Proteins A and C appear to have little average change over the time period, while Proteins B and C do appear to have sort of positive correlation with time. Due to Protein B's higher concentration as compared to the others, the scale makes this plot difficult to read. See Figure 4 for separate correlational graphs for the proteins.
+
+```{r plot2, echo=FALSE}
+plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("Concentration"), pch=16, col='black', ylim=c(0,40.5))
+points(Conc_data$Time..ms., Conc_data$X.ProtB., pch=16, col='orange')
+points(Conc_data$Time..ms., Conc_data$X.ProtC., pch=16, col='green')
+points(Conc_data$Time..ms., Conc_data$X.ProtD., pch=16, col='purple')
+```
+
+**Figure 3.**
+
+This plot, shown below, is similar to Figure 3 in that it also shows concentration of Proteins A, B, C, and D over a 100ms time period. Again, there appears to be no correlation between concentration and time for Proteins A and C, and there appears to be positive correlations between concentration and time for Proteins B and D. The line graph element of this figure makes these assertions more visible.
+
+```{r plot3, echo=FALSE}
+plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("Concentration"), pch=19, col='black', ylim=c(0,40.5), type='l', lwd=2.5)
+lines(Conc_data$Time..ms., Conc_data$X.ProtB., pch=19, col='orange', lwd=2.5)
+lines(Conc_data$Time..ms., Conc_data$X.ProtC., pch=19, col='green', lwd=2.5)
+lines(Conc_data$Time..ms., Conc_data$X.ProtD., pch=19, col='purple', lwd=2.5)
+legend('topleft', c("Protein A", "Protein B", "Protein C", "Protein D"), lty=1,lwd=2.5, col=c('black', 'orange', 'green', 'purple'))
+```
+
+**Figure 4.**
+
+The figure below includes the same data as Figures 2 and 3; however, it splits the proteins onto separate graphs of their own concentrations versus the 100ms time period. In this depiction, it is more obvious that Proteins A and C appear to have no correlation between concentration and time and may therefore be treated as constant over time. Protein B is again a positive correlation, but this depiction shows it more visibly as a positive and perhaps linear relationship. Similarly, Protein D again shows a positive correlation, but this depiction shows it more visibly as a positive and perhaps logarithmic relationship approaching a horizontal asymptote of 1.0.
+
+```{r plot4, echo=FALSE}
+old.par <- par(mfrow=c(2,2), mar=c(3,4.5,3,1))
+plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("[Protein A]"), type='l', lty=1, col='black')
+plot(Conc_data$Time..ms., Conc_data$X.ProtB., xlab= "Time (ms)", ylab=("[Protein B]"), type='l',lty=1, col='orange')
+plot(Conc_data$Time..ms., Conc_data$X.ProtC., xlab= "Time (ms)", ylab=("[Protein C]"), type='l',lty=1, col='green')
+plot(Conc_data$Time..ms., Conc_data$X.ProtD., xlab= "Time (ms)", ylab=("[Protein D]"),type='l', lty=1, col='purple')
+par(old.par)
+```
+
+**Figure 5.**
+
+This figure, shown below, again depicts concentration of Protein B over time. A linear regression line has been added in black. The line fits well and supports the assumption that Protein B increases linearly with time; however, it cannot be ignored that perhaps the concentration of Protein B has a different shape past the time constraint of 100ms. Therefore, more experimentation with wider time frames must be executed.
+
+```{r plot5, echo=FALSE}
+plot(Conc_data$Time..ms., Conc_data$X.ProtB., xlab= "Time (ms)", ylab=("[Protein B]"), pch=16, col='orange')
+abline(lm(Conc_data$X.ProtB. ~ Conc_data$Time..ms.), lwd=2)
+```
+
+**Figure 6.**
+
+The figure below again shows concentration of Protein D over time. A non-linear regression line of the Michaelis-Menten equation ((a\*time)/(b+Time)) was added. This line does not visually appear to fit well; however, it returns a correlational coefficient of 0.97, which suggests a good fit. The data appears to approach a horizontal asymptote of 1.0, which may be expected to be the maximum possible concentration of Protein D.
+
+```{r plot6, echo=FALSE}
+fit <- nls(Conc_data$X.ProtD.~a*Conc_data$Time..ms./(b+Conc_data$Time..ms.), data=Conc_data, start=list(a=0.1,b=0.1))
+plot(Conc_data$Time..ms., Conc_data$X.ProtD., xlab= "Time (ms)", ylab=("[Protein D]"), pch=19, col='purple')
+lines(Conc_data$Time..ms., predict(fit), lwd=2)
+```
+
+```{r PMCs, include=FALSE}
 library(readxl)
 PMC3077530_Data <- read.csv("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3077530_Data.txt", sep="", header = TRUE)
 PMC2775422_Data <- read.csv("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC2775422_Data.txt", sep="", header = TRUE)
@@ -23,11 +91,26 @@ PMC3872086_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Proj
 PMC4059435_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC4059435_Data.xlsx")
 PMC3905728_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3905728_Data.xlsx", sheet = "Sheet1")
 PMC3827979_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3827979_Data.xlsx")
+library(dplyr)
+library(data.table)
+require(data.table)
 ```
 
+**Figure 7.**
 
-removing letters from end of PMC3077530$SNP data and combining with other data
-```{r}
+The figure below combines data of common SNPs found in patients with schizophrenia and plots the relative frequency of these common SNPs occurring on each chromosome (relative frequency was calculated as ((raw number of unique SNPs/length of chromosome in base pairs)). If the distribution of SNPs was truly random, it would be expected that all chromosomes would have a relative frequency of about 1.0; however, this graph shows that chromosomes 6, 22, and 11 have unusually high relative frequencies, and this has been confirmed through statistical analysis. Therefore, these chromosomes have been selected for further analysis.
+
+```{r plot 7, echo=FALSE}
+temp <- substr(PMC3077530_Data$SNP,1,nchar(PMC3077530_Data$SNP)-3)
+temp3 <- c()
+for (each in PMC3912837_Data$SNP){
+  temp2 <- unlist(strsplit(each, ""))
+  if ("*" %in% temp2){
+   temp3 <- c(temp3, (substr(each, 2, nchar(each))))
+  } else
+    temp3 <- c(temp3, each)
+}
+SNP <- c(temp, PMC2775422_Data$SNP, temp3, PMC2890845_Data$`Tag SNP ID`, PMC4724864_Data$SNP, PMC6927206_Data$SNP...1, PMC3872086_Data$SNP, PMC4059435_Data$SNP, PMC3905728_Data$`Strongest SNP`, PMC3827979_Data$`rs ID`)
 temp <- substr(PMC3077530_Data$SNP,1,nchar(PMC3077530_Data$SNP)-3)
 
 temp3 <- c()
@@ -39,11 +122,6 @@ for (each in PMC3912837_Data$SNP){
     temp3 <- c(temp3, each)
 }
 SNP <- c(temp, PMC2775422_Data$SNP, temp3, PMC2890845_Data$`Tag SNP ID`, PMC4724864_Data$SNP, PMC6927206_Data$SNP...1, PMC3872086_Data$SNP, PMC4059435_Data$SNP, PMC3905728_Data$`Strongest SNP`, PMC3827979_Data$`rs ID`)
-```
-
-
-splitting PMC2890845 and PMC3827979 into Chr and position
-```{r}
 temp4 <- c()
 for (each in PMC2890845_Data$CNVR) {
   temp <- unlist(strsplit(each, ""))
@@ -93,14 +171,6 @@ temp3 <- c()
 temp5 <- c()
 }
 PMC3827979_Data$Chr <- temp4
-
-
-
-```
-
-
-putting positions into equal units
-```{r}
 temp <- PMC2775422_Data$Position.bp.
 temp <- temp/1000000
 temp2 <- PMC3912837_Data$Position.bp/1000000
@@ -111,11 +181,6 @@ temp7 <- PMC4059435_Data$`Location (bp)`/1000000
 temp8 <- as.numeric(PMC3905728_Data$`Position (hg18)`)/1000000
 temp9 <- PMC3827979_Data$bp/1000000
 Position.Mb <- c(PMC3077530_Data$Position.Mb., temp, temp2, temp3, temp5, temp6, PMC3872086_Data$Mb, temp7, temp8, temp9)
-```
-
-
-removing junk characters from Chr for PMC3912837; redefining 1 as 01, etc in PMC3077530 and defining Chr
-```{r}
 temp4 <- c()
 for (each in PMC3912837_Data$Chr) {
   temp <- unlist(strsplit(each, ""))
@@ -133,8 +198,6 @@ temp2 <- c()
 temp3 <- c()
 temp5 <- c()
 }
-
-
 Chr <- c()
 temp6 <- c(PMC3077530_Data$Chr, PMC2775422_Data$Chr, temp4, PMC2890845_Data$Chr, PMC4724864_Data$CHR, PMC6927206_Data$CHR, PMC3872086_Data$Chr, PMC4059435_Data$Chr., PMC3905728_Data$Chromosome, PMC3827979_Data$Chr)
 for (each in temp6){
@@ -146,11 +209,6 @@ for (each in temp6){
     Chr <- c(Chr, each)
 temp6 <- c()
 }
-```
-
-
-inserting PMCID columns for all data; defining PMCID
-```{r}
 PMC2890845_Data$PMCID <- c("PMC2890845")
 PMC3912837_Data$PMCID <- c("PMC3912837")
 PMC2775422_Data$PMCID <- c("PMC2775422")
@@ -161,25 +219,8 @@ PMC3872086_Data$PMCID <- c("PMC3872086")
 PMC4059435_Data$PMCID <- c("PMC4059435")
 PMC3905728_Data$PMCID <- c("PMC3905728")
 PMC3827979_Data$PMCID <- c("PMC3827979")
-
 PMCID <- c(PMC3077530_Data$PMCID, PMC2775422_Data$PMCID, PMC3912837_Data$PMCID, PMC2890845_Data$PMCID, PMC4724864_Data$PMCID, PMC6927206_Data$PMCID, PMC3872086_Data$PMCID, PMC4059435_Data$PMCID, PMC3905728_Data$PMCID, PMC3827979_Data$PMCID)
-```
-
-
-beginning new dataframe for all data
-```{r}
 InitialData <- data.frame(SNP, Chr, Position.Mb, PMCID)
-```
-
-
-```{r}
-length(unique(InitialData$SNP))
-length(InitialData$SNP)
-```
-
-making dataframe with only unique values of SNP (found setDT function on stack exchange)
-
-```{r}
 library(data.table)
 require(data.table)
 
@@ -203,182 +244,20 @@ for (each in tempdf3$Position.Mb){
 tempdf4 <- setDT(InitialData)[,.(PMCID=paste(PMCID,collapse = ",")), by=SNP]
 
 MainData <- data.frame("SNP"= tempdf2$SNP, "Chr"=temp2, "Position.Mb"=temp3, "PMCID"=tempdf4$PMCID)
-
-```
-
-checking to see if unique function worked
-
-```{r}
-length(unique(MainData$SNP))==length(MainData$SNP)
-```
-unadjusted frequency graph
-
-```{r}
-library(ggplot2)
-ggplot(MainData)+geom_bar(aes(x=Chr))
-```
-
-adjusted frequency graph 
-
-```{r}
 library(readxl)
-library(dplyr)
 library(ggplot2)
 ChrData <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/ChrData.xlsx")
 
 
 ObsData <- as.data.frame(table(MainData$Chr))
-
 ObsData$ChrBP <- ChrData$`Length (bp)`
 ObsData$Chr <- c(ObsData$Var1[1:23], "Y")
 
 ObsData$AdjObs <- 10^7*(ObsData$Freq/ObsData$ChrBP)
 
-mean <- mean(ObsData$AdjObs)
-sd <- sd(ObsData$AdjObs)
-mean1 <- rep(mean, 24)
-onesd <- rep(1+sd,24)
-twosd <- rep(1+2*sd, 24)
-
-plot(x=ObsData$Var1, y=ObsData$AdjObs, xlab= "Chromosome", ylab=("Relative Frequency of SNP (AU)"), pch=19, col='black', type='p')
-lines(x=ObsData$Var1, y=mean1, lty=1)
-lines(x=ObsData$Var1, y=onesd, lty=2)
-lines(x=ObsData$Var1, y=twosd, lty=3)
-legend('topright', c("Population Mean", "One SD Above", "Two SD Above"), lty=c(1,2,3))
-
-ObsData$AdjObs.binned <- cut(ObsData$AdjObs, c(0, 0.5*sd, 1, 1.5*sd, 2.0*sd, 3.0*sd, 3.5*sd, 4*sd, 4.5*sd, 5*sd))
-
-ggplot(ObsData)+geom_bar(aes(x=AdjObs.binned))
-```
-
-```{r}
 library(ggplot2)
 ggplot(ObsData, color= station, fill='black', aes(x=Var1, y=AdjObs))+
   geom_col(position='dodge')+
   ylab("Relative Frequency (AU)")+
   xlab("Chromosome")
-
 ```
-
-Stat testing for adjusted frequency
-
-```{r}
-mean <- mean(ObsData$AdjObs)
-sd <- sd(ObsData$AdjObs)
-
-onesd <- 1+sd
-twosd <- 1+2*sd
-
-over68 <- c()
-over95 <- c()
-
-row <- c(1:length(ObsData$Var1))
-
-for (each in row){
-  if (ObsData[each,'AdjObs']> onesd && ObsData[each,'AdjObs'] < twosd){
-      over68 <- c(over68, ObsData[each,'Var1'])
-  } else if (ObsData[each,'AdjObs'] >= twosd){
-      over95 <- c(over95, ObsData[each,'Var1'] )
-  }
-}
-print(over68)
-print(over95)
-```
-
-chr6 more testing
-
-```{r}
-row <- c(1:length(MainData$SNP))
-chr6 <- c()
-for (each in row){
-  if (MainData[each,2]=="06"){
-    chr6 <- c(chr6, as.numeric(MainData[each,3]))
-  }
-}
-
-library(ggplot2)
-testdf <- data.frame("initial"= chr6)
-testdf$binnedchr6 <- cut(chr6, c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170))
-ggplot(testdf)+geom_bar(aes(x=binnedchr6))
-
-
-row <- c(1:length(MainData$SNP))
-chr6 <- c()
-SNP6 <- c()
-for (each in row){
-  if (MainData[each,2]=="06"){
-    if (MainData[each,3]>20 && MainData[each,3]<=40){
-      chr6 <- c(chr6, as.numeric(MainData[each,3]))
-      SNP6 <- c(SNP6, MainData[each, 'SNP'])
-    }
-  }
-}
-data.frame("SNP"=SNP6,"Position.bp"=chr6)
-
-library(readxl)
-library(IRanges)
-chr6gene <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/CHR6TABLE.xlsx",range = "a1:d65")
-chr6gene$endposapprox <- chr6gene$`Begin position in sequence` + 12000
-chr6gene$pos.Mb <- chr6gene$`Begin position in sequence`/1000000
-chr6gene$end.Mb <- chr6gene$endposapprox/1000000
-
-chr6pos <- IRanges(start=min(chr6), end=max(chr6))
-chr6genes <- IRanges(start=chr6gene$pos.Mb, end=chr6gene$end.Mb)
-
-chr6overlaps <- data.frame(findOverlaps(chr6pos, chr6genes))
-
-chr6potgenes <- c()
-for (each in chr6overlaps$subjectHits){
-  chr6potgenes <- c(chr6potgenes, chr6gene[each, 'Gene family'])
-}
-
-chr6potgenes
-
-test <- data.frame('start'=chr6, 'var1'=1)
-test2 <- data.frame('seq'=chr6gene$'Begin position in sequence'/1000000, 'var1' = 0.8)
-
-
-plot(test$start, test$var1, pch=19)
-points(test2$seq, test2$var1)
-
-```
-
-```{r}
-library(OutliersO3)
-
-```
-
-
-chr22 more testing
-
-```{r}
-row <- c(1:length(MainData$SNP))
-chr22 <- c()
-for (each in row){
-  if (MainData[each,2]=="22"){
-    chr22 <- c(chr22, as.numeric(MainData[each,3]))
-  }
-}
-library(ggplot2)
-testdf <- data.frame("initial"= chr22)
-testdf$binnedchr22 <- cut(chr22, c(0, 10, 20, 30, 40, 50))
-ggplot(testdf)+geom_bar(aes(x=binnedchr22))
-```
-chr11 more testing
-
-```{r}
-row <- c(1:length(MainData$SNP))
-chr11 <- c()
-for (each in row){
-  if (MainData[each,2]=="11"){
-    chr11 <- c(chr11, as.numeric(MainData[each,3]))
-  }
-}
-library(ggplot2)
-testdf <- data.frame("initial"= chr11)
-testdf$binnedchr11 <- cut(chr11, c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140))
-ggplot(testdf)+geom_bar(aes(x=binnedchr11))
-```
-```
-
-

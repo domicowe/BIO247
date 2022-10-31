@@ -1,0 +1,1 @@
+"0","plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= ""Time (ms)"", ylab=(""Concentration""), pch=16, col='black', ylim=c(0,40.5))"

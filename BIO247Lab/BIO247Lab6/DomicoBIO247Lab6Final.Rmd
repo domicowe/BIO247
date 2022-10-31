@@ -9,6 +9,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+https://www.ncbi.nlm.nih.gov/projects/homology/maps/human/chr6/
 ```
 
 ```{r data, include=FALSE}
@@ -28,10 +29,10 @@ plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("[Protein
 The figure below shows the change in concentration of four proteins (Protein A, Protein B, Protein C, Protein D) over a 100ms time period. The proteins are represented by scatterplots in colors black, orange, green, and purple, respectively. Proteins A and C appear to have little average change over the time period, while Proteins B and C do appear to have sort of positive correlation with time. Due to Protein B's higher concentration as compared to the others, the scale makes this plot difficult to read. See Figure 4 for separate correlational graphs for the proteins.
 
 ```{r plot2, echo=FALSE}
-plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("Concentration"), pch=19, col='black', ylim=c(0,40.5))
-points(Conc_data$Time..ms., Conc_data$X.ProtB., pch=19, col='orange')
-points(Conc_data$Time..ms., Conc_data$X.ProtC., pch=19, col='green')
-points(Conc_data$Time..ms., Conc_data$X.ProtD., pch=19, col='purple')
+plot(Conc_data$Time..ms., Conc_data$X.ProtA., xlab= "Time (ms)", ylab=("Concentration"), pch=16, col='black', ylim=c(0,40.5))
+points(Conc_data$Time..ms., Conc_data$X.ProtB., pch=16, col='orange')
+points(Conc_data$Time..ms., Conc_data$X.ProtC., pch=16, col='green')
+points(Conc_data$Time..ms., Conc_data$X.ProtD., pch=16, col='purple')
 ```
 
 **Figure 3.**
