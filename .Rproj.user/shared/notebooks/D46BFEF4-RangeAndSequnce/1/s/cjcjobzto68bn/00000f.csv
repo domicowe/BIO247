@@ -1,0 +1,20 @@
+"0","# Upload library"
+"0","library(""Biostrings"")"
+"2","Loading required package: XVector
+"
+"2","
+Attaching package: ‘Biostrings’
+
+"
+"2","The following object is masked from ‘package:base’:
+
+    strsplit
+
+"
+"0","# Read in FASTA file"
+"0","fastaFile <- readDNAStringSet('C:/Users/Whitn/OneDrive/Desktop/dubjay-bioinformatics/Chapters9-10/egfr_flank.fasta')"
+"0",""
+"0","# Access names and sequences to put into a dataframe"
+"0","seq_name = names(fastaFile)"
+"0","sequence = paste(fastaFile)"
+"0","BS_data = data.frame(seq_name,sequence)"

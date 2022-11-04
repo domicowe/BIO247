@@ -13,4 +13,3 @@
 "0",""
 "0","Chr22Genes <- data.frame(potSNP22)"
 "0","Chr22Genes$potgenes22 <- potgenes22"
-"0","View(Chr22Genes)"

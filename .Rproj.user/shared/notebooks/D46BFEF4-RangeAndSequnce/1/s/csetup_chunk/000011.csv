@@ -1,0 +1,346 @@
+"1","
+"
+"1","  Binaries will be installed
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/arrow_10.0.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 16257935 bytes (15.5 MB)
+"
+"2","downloaded 15.5 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/cli_3.4.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1257404 bytes (1.2 MB)
+"
+"2","downloaded 1.2 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/commonmark_1.8.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 138490 bytes (135 KB)
+"
+"2","downloaded 135 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/digest_0.6.30.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 195123 bytes (190 KB)
+"
+"2","downloaded 190 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/emmeans_1.8.2.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 2102845 bytes (2.0 MB)
+"
+"2","downloaded 2.0 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/gmp_0.6-7.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 738016 bytes (720 KB)
+"
+"2","downloaded 720 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/jsonlite_1.8.3.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1104801 bytes (1.1 MB)
+"
+"2","downloaded 1.1 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/lme4_1.1-30.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 4876194 bytes (4.7 MB)
+"
+"2","downloaded 4.7 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/markdown_1.3.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 134297 bytes (131 KB)
+"
+"2","downloaded 131 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/mclust_6.0.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 4093871 bytes (3.9 MB)
+"
+"2","downloaded 3.9 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/minqa_1.2.5.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 449237 bytes (438 KB)
+"
+"2","downloaded 438 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/openssl_2.0.4.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 2652365 bytes (2.5 MB)
+"
+"2","downloaded 2.5 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/openxlsx_4.2.5.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 2349071 bytes (2.2 MB)
+"
+"2","downloaded 2.2 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/pcaPP_2.0-3.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 412170 bytes (402 KB)
+"
+"2","downloaded 402 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/processx_3.8.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 846639 bytes (826 KB)
+"
+"2","downloaded 826 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/ps_1.7.2.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 548861 bytes (535 KB)
+"
+"2","downloaded 535 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/rrcov_1.7-2.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 2195296 bytes (2.1 MB)
+"
+"2","downloaded 2.1 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/sys_3.4.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 46485 bytes (45 KB)
+"
+"2","downloaded 45 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/vctrs_0.5.0.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1362161 bytes (1.3 MB)
+"
+"2","downloaded 1.3 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/xfun_0.34.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 405287 bytes (395 KB)
+"
+"2","downloaded 395 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/XML_3.99-0.12.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 3052148 bytes (2.9 MB)
+"
+"2","downloaded 2.9 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/yaml_2.3.6.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 116473 bytes (113 KB)
+"
+"2","downloaded 113 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/zip_2.2.2.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 417582 bytes (407 KB)
+"
+"2","downloaded 407 KB
+
+"
+"1","package ‘arrow’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘cli’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘cli’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\cli\libs\x64\cli.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\cli\libs\x64\cli.dll: Permission denied"
+"2","Warning: restored ‘cli’"
+"1","package ‘commonmark’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘digest’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘digest’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\digest\libs\x64\digest.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\digest\libs\x64\digest.dll: Permission denied"
+"2","Warning: restored ‘digest’"
+"1","package ‘emmeans’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘gmp’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘jsonlite’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘lme4’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘markdown’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘mclust’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘minqa’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘openssl’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘openxlsx’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘pcaPP’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘processx’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘ps’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘rrcov’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘sys’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘vctrs’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘vctrs’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\vctrs\libs\x64\vctrs.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\vctrs\libs\x64\vctrs.dll: Permission denied"
+"2","Warning: restored ‘vctrs’"
+"1","package ‘xfun’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘xfun’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\xfun\libs\x64\xfun.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\xfun\libs\x64\xfun.dll: Permission denied"
+"2","Warning: restored ‘xfun’"
+"1","package ‘XML’ successfully unpacked and MD5 sums checked
+"
+"1","package ‘yaml’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘yaml’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\yaml\libs\x64\yaml.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\yaml\libs\x64\yaml.dll: Permission denied"
+"2","Warning: restored ‘yaml’"
+"1","package ‘zip’ successfully unpacked and MD5 sums checked
+"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	C:\Users\Whitn\AppData\Local\Temp\RtmpwZUY6f\downloaded_packages"
+"1",""
+"1","
+"
+"2","installing the source package ‘pkgload’
+
+"
+"2","trying URL 'https://cran.rstudio.com/src/contrib/pkgload_1.3.1.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 76689 bytes (74 KB)
+"
+"2","downloaded 74 KB
+
+"
+"1","* installing *source* package 'pkgload' ...
+"
+"1","** package 'pkgload' successfully unpacked and MD5 sums checked
+"
+"1","** using staged installation
+"
+"1","** R
+"
+"1","** inst
+"
+"1","** byte-compile and prepare package for lazy loading
+"
+"1","** help
+"
+"1","*** installing help indices
+"
+"1","** building package indices
+"
+"1","** testing if installed package can be loaded from temporary location
+"
+"1","** testing if installed package can be loaded from final location
+"
+"1","** testing if installed package keeps a record of temporary installation path
+"
+"1","* DONE (pkgload)
+"
+"2","
+"
+"2",""
+"2","The downloaded source packages are in
+	‘C:\Users\Whitn\AppData\Local\Temp\RtmpwZUY6f\downloaded_packages’"
+"2",""
+"2","
+"
+"0","BiocManager::install(""GenomicRanges"")"
+"2","'getOption(""repos"")' replaces Bioconductor standard repositories, see '?repositories' for details
+
+replacement repositories:
+    CRAN: https://cran.rstudio.com/
+
+"
+"2","Bioconductor version 3.15 (BiocManager 1.30.19), R 4.2.1 (2022-06-23 ucrt)
+"
+"2","Warning: package(s) not installed when version(s) same as or greater than current; use `force = TRUE` to
+  re-install: 'GenomicRanges'"
+"2","Installation paths not writeable, unable to update packages
+  path: C:/Program Files/R/R-4.2.1/library
+  packages:
+    cluster, foreign, MASS, Matrix, mgcv, nlme, nnet, rpart, survival
+"
+"2","Old packages: 'cli', 'data.table', 'digest', 'lme4', 'vctrs', 'xfun', 'yaml'
+"
+"1","Update all/some/none? [a/s/n]: "
+"0","a"
+"2","Warning: package ‘data.table’ is in use and will not be installed"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/annotation/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/annotation/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/experiment/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/experiment/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/workflows/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/workflows/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/books/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/books/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"1","
+"
+"1",""
+"1","  There is a binary version available but the source version is later"
+"1",""
+"1",":
+"

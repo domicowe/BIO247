@@ -1,0 +1,260 @@
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"0","if (!require(""BiocManager"", quietly = TRUE))"
+"0","install.packages(""BiocManager"")"
+"2","Bioconductor version 3.15 (BiocManager 1.30.19), R 4.2.1 (2022-06-23 ucrt)
+"
+"2","Bioconductor version '3.15' is out-of-date; the current release version '3.16' is available with R version
+  '4.2'; see https://bioconductor.org/install
+"
+"0","BiocManager::install()"
+"2","'getOption(""repos"")' replaces Bioconductor standard repositories, see '?repositories' for details
+
+replacement repositories:
+    CRAN: https://cran.rstudio.com/
+
+"
+"2","Bioconductor version 3.15 (BiocManager 1.30.19), R 4.2.1 (2022-06-23 ucrt)
+"
+"2","Installation paths not writeable, unable to update packages
+  path: C:/Program Files/R/R-4.2.1/library
+  packages:
+    cluster, foreign, MASS, Matrix, mgcv, nlme, nnet, rpart, survival
+"
+"2","Old packages: 'cli', 'digest', 'xfun', 'yaml'
+"
+"1","Update all/some/none? [a/s/n]: "
+"0","a"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/annotation/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/annotation/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/experiment/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/experiment/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/workflows/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/workflows/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/books/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/books/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/cli_3.4.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1258293 bytes (1.2 MB)
+"
+"2","downloaded 1.2 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/digest_0.6.30.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 195073 bytes (190 KB)
+"
+"2","downloaded 190 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/xfun_0.34.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 405862 bytes (396 KB)
+"
+"2","downloaded 396 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/yaml_2.3.6.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 116473 bytes (113 KB)
+"
+"2","downloaded 113 KB
+
+"
+"1","package ‘cli’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘cli’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\cli\libs\x64\cli.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\cli\libs\x64\cli.dll: Permission denied"
+"2","Warning: restored ‘cli’"
+"1","package ‘digest’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘digest’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\digest\libs\x64\digest.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\digest\libs\x64\digest.dll: Permission denied"
+"2","Warning: restored ‘digest’"
+"1","package ‘xfun’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘xfun’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\xfun\libs\x64\xfun.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\xfun\libs\x64\xfun.dll: Permission denied"
+"2","Warning: restored ‘xfun’"
+"1","package ‘yaml’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘yaml’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\yaml\libs\x64\yaml.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\yaml\libs\x64\yaml.dll: Permission denied"
+"2","Warning: restored ‘yaml’"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	C:\Users\Whitn\AppData\Local\Temp\Rtmp8ItrWx\downloaded_packages"
+"1",""
+"1","
+"
+"0","BiocManager::install(""GenomicRanges"")"
+"2","'getOption(""repos"")' replaces Bioconductor standard repositories, see '?repositories' for details
+
+replacement repositories:
+    CRAN: https://cran.rstudio.com/
+
+"
+"2","Bioconductor version 3.15 (BiocManager 1.30.19), R 4.2.1 (2022-06-23 ucrt)
+"
+"2","Warning: package(s) not installed when version(s) same as or greater than current; use `force = TRUE` to re-install:
+  'GenomicRanges'"
+"2","Installation paths not writeable, unable to update packages
+  path: C:/Program Files/R/R-4.2.1/library
+  packages:
+    cluster, foreign, MASS, Matrix, mgcv, nlme, nnet, rpart, survival
+"
+"2","Old packages: 'cli', 'digest', 'xfun', 'yaml'
+"
+"1","Update all/some/none? [a/s/n]: "
+"0","a"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/annotation/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/annotation/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/experiment/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/data/experiment/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/workflows/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/workflows/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/books/bin/windows/contrib/4.2/PACKAGES.rds': HTTP status was '404 Not Found'"
+"2","Warning: downloaded length 0 != reported length 6776"
+"2","Warning: cannot open URL 'https://bioconductor.org/packages/3.15/books/bin/windows/contrib/4.2/PACKAGES.gz': HTTP status was '404 Not Found'"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/cli_3.4.1.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 1258293 bytes (1.2 MB)
+"
+"2","downloaded 1.2 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/digest_0.6.30.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 195073 bytes (190 KB)
+"
+"2","downloaded 190 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/xfun_0.34.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 405862 bytes (396 KB)
+"
+"2","downloaded 396 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.2/yaml_2.3.6.zip'
+"
+"2","Content type 'application/zip'"
+"2"," length 116473 bytes (113 KB)
+"
+"2","downloaded 113 KB
+
+"
+"1","package ‘cli’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘cli’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\cli\libs\x64\cli.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\cli\libs\x64\cli.dll: Permission denied"
+"2","Warning: restored ‘cli’"
+"1","package ‘digest’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘digest’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\digest\libs\x64\digest.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\digest\libs\x64\digest.dll: Permission denied"
+"2","Warning: restored ‘digest’"
+"1","package ‘xfun’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘xfun’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\xfun\libs\x64\xfun.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\xfun\libs\x64\xfun.dll: Permission denied"
+"2","Warning: restored ‘xfun’"
+"1","package ‘yaml’ successfully unpacked and MD5 sums checked
+"
+"2","Warning: cannot remove prior installation of package ‘yaml’"
+"2","Warning: problem copying C:\Users\Whitn\AppData\Local\R\win-library\4.2\00LOCK\yaml\libs\x64\yaml.dll to C:\Users\Whitn\AppData\Local\R\win-library\4.2\yaml\libs\x64\yaml.dll: Permission denied"
+"2","Warning: restored ‘yaml’"
+"1","
+"
+"1",""
+"1","The downloaded binary packages are in
+	C:\Users\Whitn\AppData\Local\Temp\Rtmp8ItrWx\downloaded_packages"
+"1",""
+"1","
+"
+"0","library(ggplot2)"
+"0","library('Biostrings')"
+"2","Loading required package: BiocGenerics
+"
+"2","
+Attaching package: ‘BiocGenerics’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames, dirname, do.call, duplicated,
+    eval, evalq, Filter, Find, get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,
+    match, mget, order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind, Reduce,
+    rownames, sapply, setdiff, sort, table, tapply, union, unique, unsplit, which.max, which.min
+
+"
+"2","Loading required package: S4Vectors
+"
+"2","Loading required package: stats4
+"
+"2","
+Attaching package: ‘S4Vectors’
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    expand.grid, I, unname
+
+"
+"2","Loading required package: IRanges
+"
+"2","
+Attaching package: ‘IRanges’
+
+"
+"2","The following object is masked from ‘package:grDevices’:
+
+    windows
+
+"
+"2","Loading required package: XVector
+"
+"2","Loading required package: GenomeInfoDb
+"
+"2","
+Attaching package: ‘Biostrings’
+
+"
+"2","The following object is masked from ‘package:base’:
+
+    strsplit
+
+"
+"0","library(writexl)"
+"2","Warning: package ‘writexl’ was built under R version 4.2.2"
+"0","library(IRanges)"
+"0","library(GenomicRanges)"

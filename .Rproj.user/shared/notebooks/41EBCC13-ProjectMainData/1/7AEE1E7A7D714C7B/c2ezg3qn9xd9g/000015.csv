@@ -1,0 +1,6 @@
+"0","library(ggplot2)"
+"0","ggplot(ObsData, color= station, fill='black', aes(x=Var1, y=AdjObs))+"
+"0","  geom_col(position='dodge')+"
+"0","  ylab(""Relative Frequency (AU)"")+"
+"0","  xlab(""Chromosome"")"
+"0",""

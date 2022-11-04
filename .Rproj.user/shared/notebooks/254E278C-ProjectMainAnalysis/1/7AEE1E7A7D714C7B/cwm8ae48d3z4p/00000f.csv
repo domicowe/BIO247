@@ -1,0 +1,6 @@
+"0","NCBIGeneDescrData <- read_excel(""C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/NCBIGeneDescrData.xlsx"")"
+"0",""
+"0","genedata$officialsymbol <- NCBIGeneDescrData$officialsymbol"
+"0","genedata$fullname <- NCBIGeneDescrData$fullname"
+"0","genedata$description <- NCBIGeneDescrData$description"
+"0","genedata$simpdesc <- NCBIGeneDescrData$simple"

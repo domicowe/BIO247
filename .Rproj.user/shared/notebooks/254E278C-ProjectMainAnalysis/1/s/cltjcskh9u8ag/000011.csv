@@ -1,0 +1,3 @@
+"0","genedata <- data.frame(""chr""=c(Chr6Genes$chr, Chr11Genes$chr))"
+"0","genedata$bp <- c(Chr6Genes$potSNP6, Chr11Genes$potSNP11)"
+"0","genedata$potgene <- c(Chr6Genes$potgenes6, Chr11Genes$potgenes11)"

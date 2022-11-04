@@ -1,5 +1,5 @@
 ---
-title: "Chr6Analysis"
+title: "chr6analysis"
 author: "Whitney Domico"
 date: "`r Sys.Date()`"
 output: html_document
@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-
+cleaning data from NCBI Chr 6 Homology
 ```{r}
 Chr6DataNCBI <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/Chr6DataNCBI.xlsx")
 Chr6DataNCBI <- Chr6DataNCBI[,1:3]
@@ -41,30 +41,7 @@ Chr6DataNCBI$endpos <- endpos
 ```
 
 
-```{r}
-chr6ranges <- IRanges(start=min(startpos), end=max(endpos))
-```
-
-
-```{r}
-potSNP6 <- c()
-potgenes6 <- c()
-row <- c(1:length(Chr6DataNCBI$startpos))
-for (each in chr6){
-  for (each2 in row){
-    if (each >= Chr6DataNCBI[each2,'startpos'] && each <= Chr6DataNCBI[each2,'endpos']){
-        potSNP6 <- c(potSNP6, each)
-        potgenes6 <- c(potgenes6, Chr6DataNCBI[each2,3])
-    }
-  }
-}
-unqpotgenes6<-unique(potgenes6)
-
-Chr6Genes <- data.frame(potSNP6)
-Chr6Genes$potgenes6 <- potgenes6
-```
-
-
+finding most common SNP range
 ```{r}
 row <- c(1:length(MainData$SNP))
 chr6 <- c()
@@ -93,30 +70,47 @@ for (each in row){
 }
 data.frame("SNP"=SNP6,"Position.bp"=chr6)
 
-library(readxl)
-library(IRanges)
-chr6gene <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/CHR6TABLE.xlsx",range = "a1:d65")
-chr6gene$endposapprox <- chr6gene$`Begin position in sequence` + 12000
-chr6gene$pos.Mb <- chr6gene$`Begin position in sequence`/1000000
-chr6gene$end.Mb <- chr6gene$endposapprox/1000000
+freqtable6 <- as.data.frame(table(testdf$binnedchr6))
+mean <- mean(freqtable6$Freq)
+sd <- sd(freqtable6$Freq)
 
-chr6pos <- IRanges(start=min(chr6), end=max(chr6))
-chr6genes <- IRanges(start=chr6gene$pos.Mb, end=chr6gene$end.Mb)
+onesd <- 1+sd
+twosd <- 1+2*sd
 
-chr6overlaps <- data.frame(findOverlaps(chr6pos, chr6genes))
+over68 <- c()
+over95 <- c()
 
-chr6potgenes <- c()
-for (each in chr6overlaps$subjectHits){
-  chr6potgenes <- c(chr6potgenes, chr6gene[each, 'Gene family'])
+row <- c(1:length(freqtable6$Freq))
+
+for (each in row){
+  if (freqtable6[each,'Freq']> onesd && freqtable6[each,'Freq'] < twosd){
+      over68 <- c(over68, freqtable6[each,'Var1'])
+  } else if (freqtable6[each,'Freq'] >= twosd){
+      over95 <- c(over95, freqtable6[each,'Var1'] )
+  }
 }
+print(over68)
+print(over95)
 
-chr6potgenes
+```
 
-test <- data.frame('start'=chr6, 'var1'=1)
-test2 <- data.frame('seq'=chr6gene$'Begin position in sequence'/1000000, 'var1' = 0.8)
+so 3rd and 4th columns are significant
 
+finding genes in Chr6 that include the bp with SNP
+```{r}
+potSNP6 <- c()
+potgenes6 <- c()
+row <- c(1:length(Chr6DataNCBI$startpos))
+for (each in chr6){
+  for (each2 in row){
+    if (each >= Chr6DataNCBI[each2,'startpos'] && each <= Chr6DataNCBI[each2,'endpos']){
+        potSNP6 <- c(potSNP6, each)
+        potgenes6 <- c(potgenes6, Chr6DataNCBI[each2,3])
+    }
+  }
+}
+unqpotgenes6<-unique(potgenes6)
 
-plot(test$start, test$var1, pch=19)
-points(test2$seq, test2$var1)
-
+Chr6Genes <- data.frame(potSNP6)
+Chr6Genes$potgenes6 <- potgenes6
 ```

@@ -56,20 +56,45 @@ testdf <- data.frame("initial"= chr11)
 testdf$binnedchr11 <- cut(chr11, c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140))
 ggplot(testdf)+geom_bar(aes(x=binnedchr11))
 
+freqtable11 <- as.data.frame(table(testdf$binnedchr11))
+mean <- mean(freqtable11$Freq)
+sd <- sd(freqtable11$Freq)
+
+onesd <- 1+sd
+twosd <- 1+2*sd
+
+over68 <- c()
+over95 <- c()
+
+row <- c(1:length(freqtable11$Freq))
+
+for (each in row){
+  if (freqtable11[each,'Freq']> onesd && freqtable11[each,'Freq'] < twosd){
+      over68 <- c(over68, freqtable11[each,'Var1'])
+  } else if (freqtable11[each,'Freq'] >= twosd){
+      over95 <- c(over95, freqtable11[each,'Var1'] )
+  }
+}
+print(over68)
+print(over95)
+
 row <- c(1:length(MainData$SNP))
 chr11 <- c()
 SNP11 <- c()
 for (each in row){
   if (MainData[each,2]=="11"){
-    if (MainData[each,3]>50 && MainData[each,3]<=60){
+    if (MainData[each,3]>50 && MainData[each,3]<=60 || MainData[each,3]>120 && MainData[each,3]<=130){
       chr11 <- c(chr11, as.numeric(MainData[each,3]))
       SNP11 <- c(SNP11, MainData[each, 'SNP'])
     }
   }
 }
 data.frame("SNP"=SNP11,"Position.bp"=chr11)
+
+
 ```
 
+so 6th and 13th rows in freqtable11 are significant
 
 finding potential genes
 
@@ -89,5 +114,4 @@ unqpotgenes11<-unique(potgenes11)
 
 Chr11Genes <- data.frame(potSNP11)
 Chr11Genes$potgenes11 <- potgenes11
-View(Chr11Genes)
 ```

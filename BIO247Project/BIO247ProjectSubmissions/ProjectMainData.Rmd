@@ -1,5 +1,5 @@
 ---
-title: "MakingDataFile"
+title: "makingdatafile"
 author: "Whitney Domico"
 date: "2022-10-22"
 output: html_document
@@ -236,11 +236,11 @@ ObsData$AdjObs <- 10^7*(ObsData$Freq/ObsData$ChrBP)
 
 mean <- mean(ObsData$AdjObs)
 sd <- sd(ObsData$AdjObs)
-mean1 <- rep(mean, 24)
+mean1 <- rep(1, 24)
 onesd <- rep(1+sd,24)
 twosd <- rep(1+2*sd, 24)
 
-plot(x=ObsData$Var1, y=ObsData$AdjObs, xlab= "Chromosome", ylab=("Relative Frequency of SNP (AU)"), pch=19, col='black', type='p')
+plot.default(x=ObsData$Var1, y=ObsData$AdjObs, xlab= "Chromosome", ylab=("Relative Frequency of SNP (AU)"), pch=19, col='black', type='p')
 lines(x=ObsData$Var1, y=mean1, lty=1)
 lines(x=ObsData$Var1, y=onesd, lty=2)
 lines(x=ObsData$Var1, y=twosd, lty=3)
@@ -283,102 +283,6 @@ for (each in row){
 }
 print(over68)
 print(over95)
-```
-
-chr6 more testing
-
-```{r}
-row <- c(1:length(MainData$SNP))
-chr6 <- c()
-for (each in row){
-  if (MainData[each,2]=="06"){
-    chr6 <- c(chr6, as.numeric(MainData[each,3]))
-  }
-}
-
-library(ggplot2)
-testdf <- data.frame("initial"= chr6)
-testdf$binnedchr6 <- cut(chr6, c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170))
-ggplot(testdf)+geom_bar(aes(x=binnedchr6))
-
-
-row <- c(1:length(MainData$SNP))
-chr6 <- c()
-SNP6 <- c()
-for (each in row){
-  if (MainData[each,2]=="06"){
-    if (MainData[each,3]>20 && MainData[each,3]<=40){
-      chr6 <- c(chr6, as.numeric(MainData[each,3]))
-      SNP6 <- c(SNP6, MainData[each, 'SNP'])
-    }
-  }
-}
-data.frame("SNP"=SNP6,"Position.bp"=chr6)
-
-library(readxl)
-library(IRanges)
-chr6gene <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/CHR6TABLE.xlsx",range = "a1:d65")
-chr6gene$endposapprox <- chr6gene$`Begin position in sequence` + 12000
-chr6gene$pos.Mb <- chr6gene$`Begin position in sequence`/1000000
-chr6gene$end.Mb <- chr6gene$endposapprox/1000000
-
-chr6pos <- IRanges(start=min(chr6), end=max(chr6))
-chr6genes <- IRanges(start=chr6gene$pos.Mb, end=chr6gene$end.Mb)
-
-chr6overlaps <- data.frame(findOverlaps(chr6pos, chr6genes))
-
-chr6potgenes <- c()
-for (each in chr6overlaps$subjectHits){
-  chr6potgenes <- c(chr6potgenes, chr6gene[each, 'Gene family'])
-}
-
-chr6potgenes
-
-test <- data.frame('start'=chr6, 'var1'=1)
-test2 <- data.frame('seq'=chr6gene$'Begin position in sequence'/1000000, 'var1' = 0.8)
-
-
-plot(test$start, test$var1, pch=19)
-points(test2$seq, test2$var1)
-
-```
-
-```{r}
-library(OutliersO3)
-
-```
-
-
-chr22 more testing
-
-```{r}
-row <- c(1:length(MainData$SNP))
-chr22 <- c()
-for (each in row){
-  if (MainData[each,2]=="22"){
-    chr22 <- c(chr22, as.numeric(MainData[each,3]))
-  }
-}
-library(ggplot2)
-testdf <- data.frame("initial"= chr22)
-testdf$binnedchr22 <- cut(chr22, c(0, 10, 20, 30, 40, 50))
-ggplot(testdf)+geom_bar(aes(x=binnedchr22))
-```
-chr11 more testing
-
-```{r}
-row <- c(1:length(MainData$SNP))
-chr11 <- c()
-for (each in row){
-  if (MainData[each,2]=="11"){
-    chr11 <- c(chr11, as.numeric(MainData[each,3]))
-  }
-}
-library(ggplot2)
-testdf <- data.frame("initial"= chr11)
-testdf$binnedchr11 <- cut(chr11, c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140))
-ggplot(testdf)+geom_bar(aes(x=binnedchr11))
-```
 ```
 
 

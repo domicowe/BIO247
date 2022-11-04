@@ -1,4 +1,30 @@
 "0","library(data.table)"
+"2","Warning: package ‘data.table’ was built under R version 4.2.2"
+"2","Registered S3 method overwritten by 'data.table':
+  method           from
+  print.data.table     
+"
+"2","data.table 1.14.4 using 4 threads (see ?getDTthreads).  Latest news: r-datatable.com
+"
+"2","
+Attaching package: ‘data.table’
+
+"
+"2","The following object is masked from ‘package:GenomicRanges’:
+
+    shift
+
+"
+"2","The following object is masked from ‘package:IRanges’:
+
+    shift
+
+"
+"2","The following objects are masked from ‘package:S4Vectors’:
+
+    first, second
+
+"
 "0","require(data.table)"
 "0",""
 "0",""

@@ -1,0 +1,2 @@
+"0","# Read in file, fill in blank spaces so dataframe has correct dimensions"
+"0","df <- read.table('C:/Users/Whitn/OneDrive/Desktop/dubjay-bioinformatics/Chapters9-10/egfr_flank.fasta',fill=TRUE)"

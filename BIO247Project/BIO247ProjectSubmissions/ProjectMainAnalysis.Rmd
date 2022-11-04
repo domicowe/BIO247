@@ -1,0 +1,228 @@
+---
+title: "mainanalysis"
+author: "Whitney Domico"
+date: '`r Sys.Date()`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+adding chr data to gene data -- Chr22 has NO GENES and will be removed from now on
+```{r}
+Chr11Genes$chr <- 11
+Chr6Genes$chr <- "06"
+```
+
+combining chr 6, 11 dfs
+```{r}
+genedata <- data.frame("chr"=c(Chr6Genes$chr, Chr11Genes$chr))
+genedata$bp <- c(Chr6Genes$potSNP6, Chr11Genes$potSNP11)
+genedata$potgene <- c(Chr6Genes$potgenes6, Chr11Genes$potgenes11)
+```
+
+adding SNPs to df
+```{r}
+row <- c(1:length(MainData$Position.Mb))
+
+temp <- c()
+for (each in row){
+  for (each2 in genedata$bp){
+    if (each2 == MainData$Position.Mb[each]){
+      temp <- c(temp, MainData$SNP[each])
+    }
+  }
+}
+
+
+genedata$SNP <- temp
+```
+
+
+
+adding descriptions to data
+
+```{r}
+NCBIGeneDescrData <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/NCBIGeneDescrData.xlsx")
+
+genedata$officialsymbol <- NCBIGeneDescrData$officialsymbol
+genedata$fullname <- NCBIGeneDescrData$fullname
+genedata$description <- NCBIGeneDescrData$description
+genedata$simpdesc <- NCBIGeneDescrData$simple
+```
+
+uploading pathways data and adding to genedata
+```{r}
+library(readxl)
+BAT2path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/BAT2path.xlsx")
+HLADRB1path <- HLADRB1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/HLADRB1path.xlsx", sheet = "Sheet2")
+LRRC16Apath <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/LRRC16Apath.xlsx")
+SLC17A1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/SLC17A1path.xlsx")
+PPP1R10path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PPP1R10path.xlsx")
+LTApath <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/LTApath.xlsx")
+SLC44A4path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/SLC44A4path.xlsx")
+ZKSCAN3path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/ZKSCAN3path.xlsx")
+ZKSCAN12path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/ZKSCAN12path.xlsx")
+OR5T2path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/OR5T2path.xlsx")
+SMTNL1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/SMTNL1path.xlsx")
+CCDC15path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/CCDC15path.xlsx")
+TMEM218path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/TMEM218path.xlsx")
+genedata$pathways <- c(BAT2path, HLADRB1path, LRRC16Apath, SLC17A1path, PPP1R10path, LTApath, SLC44A4path, ZKSCAN3path, ZKSCAN12path, OR5T2path, SMTNL1path, CCDC15path, TMEM218path)
+
+```
+
+```{r}
+temp <- c()
+pathways <- c()
+for (each in genedata$pathways){
+  temp <- unlist(strsplit(each, ","))
+  pathways <- c(pathways, temp)
+}
+pathways <- na.omit(pathways)
+length(pathways)
+length(unique(pathways))
+unqpathways <- unique(pathways)
+```
+
+
+```{r}
+df <- as.data.frame(table(pathways))
+```
+
+
+```{r}
+vect <- c()
+for (each in df$pathways){
+    if (each %in% BAT2path$pathways){
+      vect <- c(vect, ", BAT2")
+    } else
+      vect <- c(vect, "no")
+}
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% HLADRB1path$pathways){
+      vect2 <- c(vect2, "HLADRB1")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(vect, vect2, sep=", ")
+
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% LRRC16Apath$pathways){
+      vect2 <- c(vect2, "LRRC16A")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(path, vect2, sep=", ")
+
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% SLC17A1path$pathways){
+      vect2 <- c(vect2, "SLC17A1")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(path, vect2, sep=", ")
+
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% PPP1R10path$pathways){
+      vect2 <- c(vect2, "PPP1R10")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(path, vect2, sep=", ")
+
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% LTApath$pathways){
+      vect2 <- c(vect2, "LTA")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(path, vect2, sep=", ")
+
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% SLC44A4path$pathways){
+      vect2 <- c(vect2, "SLC44A4")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(path, vect2, sep=", ")
+
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% ZKSCAN3path$pathways){
+      vect2 <- c(vect2, "ZKSCAN3")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(path, vect2, sep=", ")
+
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% ZKSCAN12path$pathways){
+      vect2 <- c(vect2, "ZKSCAN12")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(path, vect2, sep=", ")
+
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% OR5T2path$pathways){
+      vect2 <- c(vect2, "OR5T2")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(path, vect2, sep=", ")
+
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% SMTNL1path$pathways){
+      vect2 <- c(vect2, "SMTNL1")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(path, vect2, sep=", ")
+
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% CCDC15path$pathways){
+      vect2 <- c(vect2, "CCDC15")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(path, vect2, sep=", ")
+
+vect2 <- c()
+for (each in df$pathways){
+    if (each %in% TMEM218path$pathways){
+      vect2 <- c(vect2, "TMEM218")
+    } else
+      vect2 <- c(vect2, "no")
+}
+path <- paste(path, vect2, sep=", ")
+
+```
+
+
+```{r}
+temp <- c()
+
+temp <- gsub("no", "", path)
+
+temp2 <- gsub(", ,",",",temp)
+temp3 <- gsub(", ,",",",temp2)
+temp4 <- gsub(", ,",",",temp3)
+temp5 <- gsub(", ,",",",temp4)
+
+temp6 <- sub(".{2}", "", temp5)
+temp7 <- sub(".{2}$", "", temp6)
+
+df$genes <- temp7
+```
+

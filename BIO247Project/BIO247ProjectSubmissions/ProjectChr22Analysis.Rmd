@@ -9,3 +9,108 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+cleaning data from NCBI Chr 22 Homology 
+```{r} 
+Chr22DataNCBI <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/Chr22DataNCBI.xlsx")
+Chr22DataNCBI <- Chr22DataNCBI[,1:3]
+
+temp <- c()
+generang <- c()
+for (each in Chr22DataNCBI$`human position`){ 
+  temp <- unlist(strsplit(each, ':'))
+  temp2 <- temp[2]
+  temp3 <- unlist(strsplit(temp2, " "))
+  temp4 <- temp3[1]
+  generang <- c(generang, temp4)
+}
+
+Chr22DataNCBI$gene.range <- generang
+
+startpos <- c()
+endpos <- c()
+for (each in Chr22DataNCBI$gene.range){
+  temp <- unlist(strsplit(each, "-"))
+  temp2 <- gsub(",", "", temp) 
+  startpos <- c(startpos, as.numeric(temp2[1])/1000000)
+  endpos <- c(endpos, as.numeric(temp2[2])/1000000)
+}
+
+Chr22DataNCBI$startpos <- startpos
+Chr22DataNCBI$endpos <- endpos
+```
+
+
+finding most common SNP range
+
+```{r}
+row <- c(1:length(MainData$SNP))
+chr22 <- c()
+for (each in row){
+  if (MainData[each,2]=="22"){
+    chr22 <- c(chr22, as.numeric(MainData[each,3]))
+  }
+}
+library(ggplot2)
+testdf <- data.frame("initial"= chr22)
+testdf$binnedchr22 <- cut(chr22, c(0, 10, 20, 30, 40, 50))
+ggplot(testdf)+geom_bar(aes(x=binnedchr22))
+
+freqtable22 <- as.data.frame(table(testdf$binnedchr22))
+mean <- mean(freqtable22$Freq)
+sd <- sd(freqtable22$Freq)
+
+onesd <- 1+sd
+twosd <- 1+2*sd
+
+over68 <- c()
+over95 <- c()
+
+row <- c(1:length(freqtable22$Freq))
+
+for (each in row){
+  if (freqtable22[each,'Freq']> onesd && freqtable22[each,'Freq'] < twosd){
+      over68 <- c(over68, freqtable22[each,'Var1'])
+  } else if (freqtable22[each,'Freq'] >= twosd){
+      over95 <- c(over95, freqtable22[each,'Var1'] )
+  }
+}
+print(over68)
+print(over95)
+
+row <- c(1:length(MainData$SNP))
+chr22 <- c()
+SNP22 <- c()
+for (each in row){
+  if (MainData[each,2]=="22"){
+    if (MainData[each,3]>30 && MainData[each,3]<=40){
+      chr22 <- c(chr22, as.numeric(MainData[each,3]))
+      SNP22 <- c(SNP22, MainData[each, 'SNP'])
+    }
+  }
+}
+data.frame("SNP"=SNP22,"Position.bp"=chr22)
+```
+so 3rd column significant
+
+finding potential genes
+
+```{r}
+potSNP22 <- c()
+potgenes22 <- c()
+row <- c(1:length(Chr22DataNCBI$startpos))
+for (each in chr22){
+  for (each2 in row){
+    if (each >= Chr22DataNCBI[each2,'startpos'] && each <= Chr22DataNCBI[each2,'endpos']){
+        potSNP22 <- c(potSNP22, each)
+        potgenes22 <- c(potgenes22, Chr22DataNCBI[each2,3])
+    }
+  }
+}
+
+
+unqpotgenes22<-unique(potgenes22)
+
+Chr22Genes <- data.frame(potSNP22)
+Chr22Genes$potgenes22 <- potgenes22
+```
