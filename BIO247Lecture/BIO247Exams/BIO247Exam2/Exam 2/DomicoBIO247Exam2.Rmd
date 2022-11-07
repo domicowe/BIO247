@@ -30,7 +30,7 @@ I used the command wc -l <filename> for each of the text files and found that on
 
 
 ## Question 3
-DNA contains genetic information in the form of a specific sequence of base pairs (A,C,G,T). This is an organism's 'genotype'; it is what is directly coded for in the DNA. RNA is then transcribed from the coding strand of DNA and is identical to the non-coding strand of DNA, except that it has U instead of T. For mRNA in particular, ribosomes in the cytoplasm translate these series of bases (in groups of three, called 'codons') into polypeptide chains where each codon codes for a particular protein. This protein -- whether just the expression/nonexpression or what the sequence of amino acids is -- is the 'phenotype'; in other words, it is how the genotype's coding is expressed in the organism. So, for example, perhaps a particular genotype is -- ACCTGT. This would code for an mRNA that is UGGACA and the protein expression would be Trp, Thr. For simplification, maybe this codes for brown eyes (phenotype). If a mutation occurred in the DNA, maybe the genotype would be changed to ACCTGG, which would give the mRNA UGGACC. This still codes for Trp, Thr, and so the phenotype would be identical, even though the genotype has changed.
+DNA contains genetic information in the form of a specific sequence of base pairs (A,C,G,T). This is an organism's 'genotype'; it is what is directly coded for in the DNA. RNA is then transcribed from the coding strand of DNA and is identical to the non-coding strand of DNA, except that it has U instead of T. For mRNA in particular, ribosomes in the cytoplasm translate these series of bases (in groups of three, called 'codons') into polypeptide chains where each codon codes for a particular amino acid. This newly formed protein -- whether just the expression/nonexpression or what the sequence of amino acids is -- is the 'phenotype'; in other words, it is how the genotype's coding is expressed in the organism. So, for example, perhaps a particular genotype is -- ACCTGT. This would code for an mRNA that is UGGACA and the protein expression would be Trp, Thr. For simplification, maybe this codes for brown eyes (phenotype). If a mutation occurred in the DNA, maybe the genotype would be changed to ACCTGG, which would give the mRNA UGGACC. This still codes for Trp, Thr, and so the phenotype would be identical (in this case, brown eyes), even though the genotype has changed.
 
 ## Question 4
 
@@ -101,15 +101,16 @@ for (each in fordf$seq_name){
     MPM <- c(MPM, each)
   }
 }
-
+#putting MPM in order for ease
+MPM <- sort(MPM)
 
 #using a loop to find corresponding sequences to seq names found above
 row <- c(1:length(fordf$seq_name))
 MPMseq <- c()
-for (each in row){
-  for (each2 in MPM){
-    if (each2 == fordf$seq_name[each]){
-      MPMseq <- c(MPMseq, fordf$sequence[each])
+for (each in MPM){
+  for (each2 in row){
+    if (each == fordf$seq_name[each2]){
+      MPMseq <- c(MPMseq, fordf$sequence[each2])
     }
   }
 }
@@ -175,7 +176,7 @@ for (each in sampdiff){
   if (each>0){
     samp1freq <- samp1freq+1
     } else if (each<0){
-      samp2freq <- samp2freq+2
+      samp2freq <- samp2freq+1
       } else
       eqfreq <- eqfreq+1
 }
@@ -190,6 +191,6 @@ eqfreq
 mean(samp1)
 mean(samp2)
 
-#sample 1 mean > sample 2 mean, so this agrees that sample1 probably has better quality
+#sample 1 mean > sample 2 mean, so this supports that sample1 has better quality
 ```
 
