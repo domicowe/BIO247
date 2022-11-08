@@ -227,8 +227,25 @@ df$genes <- temp7
 ```
 
 
+
 ```{r}
 df$percent <- df$Freq/length(genedata$potgene)*100
+```
+
+```{r}
+percents <- c()
+
+for (each in df$Freq){
+  if (each >1){
+    percents <- c(percents, each)
+  }
+}
+percents <- percents/length(genedata$potgene)*100
+percents <- as.data.frame(percents)
+```
+
+```{r}
+ggplot(percents)+ geom_bar(aes(x=percents))
 ```
 
 ```{r}
@@ -247,35 +264,61 @@ temp <- na.omit(temp)
 
 for (each in temp){
   temp2 <- unlist(strsplit(each, ""))
-  if (length(temp2)<4 && each != "RNA" && each != "HPA" && each != "MHC" && each && each != "CD4"){
+  if (length(temp2)<4 && each != "RNA" && each != "HPA" && each != "MHC" && each != "CD4"){
     rem <- c(rem, each)
   } else {
     commonwords <- c(commonwords, each)
   }
 }
-finaldata <- as.data.frame(table(commonwords))
+finaldata <- as.data.frame(table(tolower((commonwords))))
+
+finaldata <- finaldata[order(-finaldata$Freq),]
 ```
 
 ```{r}
+library(writexl)
 finaldata$relfreq <- finaldata$Freq/max(finaldata$Freq)
 write_xlsx(finaldata, "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/finaldata.xlsx")
 ```
 
+
 ```{r}
-finaldatanew <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/finaldata[revised].xlsx")
+mean <- mean(finaldata$Freq)
+sd <- sd(finaldata$Freq)
+
+onesd <- mean+sd
+twosd <- mean+2*sd
+
+over68 <- c()
+over95 <- c()
+
+row <- c(1:length(finaldata$Var1))
+
+for (each in row){
+  if (finaldata[each,'Freq']> onesd && finaldata[each,'Freq'] < twosd){
+      over68 <- c(over68, finaldata[each,'Var1'])
+  } else if (finaldata[each,'Freq'] >= twosd){
+      over95 <- c(over95, finaldata[each,'Var1'] )
+  }
+}
+length(over68)+length(over95)
 ```
 
 ```{r}
-row <- length(finaldatanew$keep):1
+finaldatanew <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/finaldatarevised.xlsx")
+```
+
+```{r}
+row <- length(finaldatanew$kept):1
 
 for (each in row){
-  if (finaldatanew$keep[each] == 0){
+  if (finaldatanew$kept[each] == 0){
     finaldatanew <- finaldatanew[-c(each),]
   }
 }
 finaldata <- finaldata[order(-finaldata$Freq),]
-finaldatanew$numforgraph <- 1:length(finaldatanew$commonwords)   
-finaldata$numforgraph <- 1:length(finaldata$commonwords)
+finaldatanew$numforgraph <- 1:length(finaldatanew$Var1)   
+finaldata$numforgraph <- 1:length(finaldata$Var1)
 
 ```
 
@@ -283,4 +326,13 @@ finaldata$numforgraph <- 1:length(finaldata$commonwords)
 ggplot(finaldata)+geom_point(aes(x=numforgraph, y=relfreq))
 ggplot(finaldatanew)+geom_point(aes(x=numforgraph, y=relfreq))
 ```
+
+```{r}
+library(ggplot2)
+ggplot(finaldatanew, color= station, fill='black', aes(x=Var1, y=Freq))+
+  geom_col(position='dodge')+
+  ylab("Frequency")+
+  xlab("Word")
+```
+
 
