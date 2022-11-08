@@ -226,3 +226,61 @@ temp7 <- sub(".{2}$", "", temp6)
 df$genes <- temp7
 ```
 
+
+```{r}
+df$percent <- df$Freq/length(genedata$potgene)*100
+```
+
+```{r}
+rem <- c()
+commonwords <- c()
+temp <- c()
+temp <- unlist(strsplit(pathways, " "))
+temp <- gsub("\\(", "", temp)
+temp <- gsub("\\)", "", temp)
+temp <- gsub("\\[", "", temp)
+temp <- gsub("\\]", "", temp)
+temp <- gsub("/", "", temp)
+temp <- gsub("\\\\", "", temp)
+temp <- gsub("\\-", "", temp)
+temp <- na.omit(temp)
+
+for (each in temp){
+  temp2 <- unlist(strsplit(each, ""))
+  if (length(temp2)<4 && each != "RNA" && each != "HPA" && each != "MHC" && each && each != "CD4"){
+    rem <- c(rem, each)
+  } else {
+    commonwords <- c(commonwords, each)
+  }
+}
+finaldata <- as.data.frame(table(commonwords))
+```
+
+```{r}
+finaldata$relfreq <- finaldata$Freq/max(finaldata$Freq)
+write_xlsx(finaldata, "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/finaldata.xlsx")
+```
+
+```{r}
+finaldatanew <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/finaldata[revised].xlsx")
+```
+
+```{r}
+row <- length(finaldatanew$keep):1
+
+for (each in row){
+  if (finaldatanew$keep[each] == 0){
+    finaldatanew <- finaldatanew[-c(each),]
+  }
+}
+finaldata <- finaldata[order(-finaldata$Freq),]
+finaldatanew$numforgraph <- 1:length(finaldatanew$commonwords)   
+finaldata$numforgraph <- 1:length(finaldata$commonwords)
+
+```
+
+```{r}
+ggplot(finaldata)+geom_point(aes(x=numforgraph, y=relfreq))
+ggplot(finaldatanew)+geom_point(aes(x=numforgraph, y=relfreq))
+```
+
