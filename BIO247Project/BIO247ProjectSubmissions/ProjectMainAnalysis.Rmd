@@ -50,6 +50,7 @@ genedata$officialsymbol <- NCBIGeneDescrData$officialsymbol
 genedata$fullname <- NCBIGeneDescrData$fullname
 genedata$description <- NCBIGeneDescrData$description
 genedata$simpdesc <- NCBIGeneDescrData$simple
+genedata$diseases <- NCBIGeneDescrData$diseases
 ```
 
 uploading pathways data and adding to genedata
@@ -72,6 +73,8 @@ genedata$pathways <- c(BAT2path, HLADRB1path, LRRC16Apath, SLC17A1path, PPP1R10p
 
 ```
 
+
+cleaning pathways data
 ```{r}
 temp <- c()
 pathways <- c()
@@ -80,17 +83,68 @@ for (each in genedata$pathways){
   pathways <- c(pathways, temp)
 }
 pathways <- na.omit(pathways)
-length(pathways)
-length(unique(pathways))
-unqpathways <- unique(pathways)
 ```
 
-
+defining new df for pathways
 ```{r}
 df <- as.data.frame(table(pathways))
 ```
 
+defining new df for diseases
+```{r}
+diseasesdf<- (as.data.frame(table(unlist(strsplit(tolower(genedata$diseases), ",")))))
+write_xlsx(diseasesdf, "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/diseasesdf.xlsx")
+```
 
+REQUIRES USER INTERACTION
+open diseasesdf.xlsx; define new column "Immune"; if disease is autoimmune, put "1" in row; if not autoimmune, put "0" in row
+```{r}
+diseasesdfnew <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/diseasesdfrevised.xlsx")
+```
+
+calculating percent of autoimmune diseases in group
+```{r}
+immune <- c()
+nonimmune <- c()
+row <- 1:length(diseasesdfnew$Immune)
+for (each in row){
+  if (diseasesdfnew$Immune[each]==1){
+    immune <- c(immune, diseasesdfnew$Var1[each])
+  } else {
+    nonimmune <- c(nonimmune, diseasesdfnew$Var1[each])
+  }
+}
+
+length(immune)/(length(immune)+length(nonimmune))
+```
+importing data about Chr6 and cutting df to only include histocompatibility genes
+
+```{r}
+chr6table <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/CHR6TABLE.xlsx")
+
+chr6table <- chr6table[8:20,]
+chr6table$`Begin position in sequence` <- chr6table$`Begin position in sequence`/1000000
+```
+
+finding percent of chr6 SNPs that are in histocompatibility complex (assuming avg gene length of 10000 bps)
+```{r}
+avglength <- 10
+histoSNP <- c()
+nonhistoSNP <- c()
+for (each in chr6){
+  if (each>=chr6table$`Begin position in sequence`[1] && each<=(chr6table$`Begin position in sequence`[length(chr6table$`Begin position in sequence`)]+avglength)){
+    histoSNP <- c(histoSNP, each)
+  } else {
+    nonhistoSNP <- c(nonhistoSNP, each)
+  }
+}
+
+histoSNP <- sort(histoSNP)
+nonhistoSNP <- sort(nonhistoSNP)
+
+length(histoSNP)/(length(nonhistoSNP)+length(histoSNP))
+```
+adding data about which pathways are in each gene
 ```{r}
 vect <- c()
 for (each in df$pathways){
@@ -207,10 +261,6 @@ for (each in df$pathways){
 }
 path <- paste(path, vect2, sep=", ")
 
-```
-
-
-```{r}
 temp <- c()
 
 temp <- gsub("no", "", path)
@@ -226,12 +276,14 @@ temp7 <- sub(".{2}$", "", temp6)
 df$genes <- temp7
 ```
 
-
+adding percent column
 
 ```{r}
 df$percent <- df$Freq/length(genedata$potgene)*100
 ```
 
+
+adding plot for amounts of pathways that are present in certain percents of genes (pathways in only 1 gene have been ommitted)
 ```{r}
 percents <- c()
 
@@ -242,12 +294,10 @@ for (each in df$Freq){
 }
 percents <- percents/length(genedata$potgene)*100
 percents <- as.data.frame(percents)
-```
 
-```{r}
 ggplot(percents)+ geom_bar(aes(x=percents))
 ```
-
+finding common words in pathway titles
 ```{r}
 rem <- c()
 commonwords <- c()
@@ -275,13 +325,14 @@ finaldata <- as.data.frame(table(tolower((commonwords))))
 finaldata <- finaldata[order(-finaldata$Freq),]
 ```
 
+saving an excel sheet with word list and frequencies
 ```{r}
 library(writexl)
 finaldata$relfreq <- finaldata$Freq/max(finaldata$Freq)
 write_xlsx(finaldata, "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/finaldata.xlsx")
 ```
 
-
+finding significant words and redefining data to only include these
 ```{r}
 mean <- mean(finaldata$Freq)
 sd <- sd(finaldata$Freq)
@@ -301,13 +352,19 @@ for (each in row){
       over95 <- c(over95, finaldata[each,'Var1'] )
   }
 }
-length(over68)+length(over95)
+relevant <- length(over68)+length(over95)
+
+
+finaldata <- finaldata[1:relevant,]
 ```
 
+REQUIRES USER INTERACTION
+open finaldata.xlsx; name new column "kept"; insert "1" for words to continue in analysis and "0" for words to omit from analysis; save file as finaldatarevised.xlsx
 ```{r}
 finaldatanew <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/finaldatarevised.xlsx")
 ```
 
+removing "0" words
 ```{r}
 row <- length(finaldatanew$kept):1
 
@@ -316,23 +373,42 @@ for (each in row){
     finaldatanew <- finaldatanew[-c(each),]
   }
 }
-finaldata <- finaldata[order(-finaldata$Freq),]
-finaldatanew$numforgraph <- 1:length(finaldatanew$Var1)   
+
 finaldata$numforgraph <- 1:length(finaldata$Var1)
 
+
+temp <- c()
+row <- 1:length(finaldata$Var1)
+for (each in finaldatanew$Var1){
+  for (each2 in row){
+    if (each == finaldata$Var1[each2]){
+      temp <- c(temp, finaldata$numforgraph[each2])
+    }
+  }
+}
+finaldatanew$numforgraph <- temp
+
 ```
 
-```{r}
-ggplot(finaldata)+geom_point(aes(x=numforgraph, y=relfreq))
-ggplot(finaldatanew)+geom_point(aes(x=numforgraph, y=relfreq))
-```
+plots for (1) counts of all significant words and (2) counts of all chosen words
 
 ```{r}
 library(ggplot2)
+
+ggplot(finaldata, color= station, fill='black', aes(x=Var1, y=Freq))+
+  geom_col(position='dodge')+
+  ylab("Frequency")+
+  xlab("Word")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.25, hjust=1))
+
 ggplot(finaldatanew, color= station, fill='black', aes(x=Var1, y=Freq))+
   geom_col(position='dodge')+
   ylab("Frequency")+
   xlab("Word")
 ```
+
+
+
+
 
 
