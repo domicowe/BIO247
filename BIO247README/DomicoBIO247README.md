@@ -20,23 +20,6 @@
 </h6>
 	<h4>
 		<ul>
-			<li>Reading Assignments </li>
-		</ul>
-	</h4>
-<p>This folder is named "BIO247ReadingAssignments" and contains all journal articles required for reading assignments as well as respective submissions, and the folders with the files inside are named by the following convention.</p>
-<h6> 
-	<ul>
-		<ul>
-			<li>BIO247Reading1</li>
-            <ul>
-               <li>BIO247Reading1AuthorLastName</li>  
-               <li>BIO247Reading1SupplementalMaterial</li>
-            </ul>
-		</ul>
-	</ul>
-</h6>
-	<h4>
-		<ul>
 			<li>Syllabus</li>  
 		</ul>
 	</h4>
@@ -56,6 +39,7 @@
     There is also a folder called "ExtraFiles" that contains supplemental information about R. 
     </p>
 </section>
+
 
 
 
