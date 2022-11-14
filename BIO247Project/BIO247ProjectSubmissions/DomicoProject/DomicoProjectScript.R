@@ -165,7 +165,7 @@ InitialData <- data.frame(SNP, Chr, Position.Mb, PMCID)
 
 
 
-##making dataframe with only unique values of SNP (found setDT function on stack exchange)
+##making dataframe with only unique values of SNP (Modified from Stack Exchange question: "Combining Rows into List on R")
 
 library(data.table)
 require(data.table)
@@ -222,9 +222,6 @@ lines(x=ObsData$Var1, y=twosd, lty=3)
 legend('topright', c("Population Mean", "One SD Above", "Two SD Above"), lty=c(1,2,3))
 
 ObsData$AdjObs.binned <- cut(ObsData$AdjObs, c(0, 0.5*sd, 1, 1.5*sd, 2.0*sd, 3.0*sd, 3.5*sd, 4*sd, 4.5*sd, 5*sd))
-
-ggplot(ObsData)+geom_bar(aes(x=AdjObs.binned))
-
 
 
 library(ggplot2)
