@@ -44,7 +44,7 @@ genedata$SNP <- temp
 adding descriptions to data
 
 ```{r}
-NCBIGeneDescrData <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/NCBIGeneDescrData.xlsx")
+NCBIGeneDescrData <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/NCBIGeneDescrData.xlsx")
 
 genedata$officialsymbol <- NCBIGeneDescrData$officialsymbol
 genedata$fullname <- NCBIGeneDescrData$fullname
@@ -56,19 +56,19 @@ genedata$diseases <- NCBIGeneDescrData$diseases
 uploading pathways data and adding to genedata
 ```{r}
 library(readxl)
-BAT2path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/BAT2path.xlsx")
-HLADRB1path <- HLADRB1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/HLADRB1path.xlsx", sheet = "Sheet2")
-LRRC16Apath <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/LRRC16Apath.xlsx")
-SLC17A1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/SLC17A1path.xlsx")
-PPP1R10path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PPP1R10path.xlsx")
-LTApath <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/LTApath.xlsx")
-SLC44A4path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/SLC44A4path.xlsx")
-ZKSCAN3path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/ZKSCAN3path.xlsx")
-ZKSCAN12path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/ZKSCAN12path.xlsx")
-OR5T2path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/OR5T2path.xlsx")
-SMTNL1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/SMTNL1path.xlsx")
-CCDC15path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/CCDC15path.xlsx")
-TMEM218path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/TMEM218path.xlsx")
+BAT2path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/BAT2path.xlsx")
+HLADRB1path <- HLADRB1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/HLADRB1path.xlsx", sheet = "Sheet2")
+LRRC16Apath <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/LRRC16Apath.xlsx")
+SLC17A1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/SLC17A1path.xlsx")
+PPP1R10path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/PPP1R10path.xlsx")
+LTApath <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/LTApath.xlsx")
+SLC44A4path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/SLC44A4path.xlsx")
+ZKSCAN3path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/ZKSCAN3path.xlsx")
+ZKSCAN12path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/ZKSCAN12path.xlsx")
+OR5T2path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/OR5T2path.xlsx")
+SMTNL1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/SMTNL1path.xlsx")
+CCDC15path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/CCDC15path.xlsx")
+TMEM218path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/TMEM218path.xlsx")
 genedata$pathways <- c(BAT2path, HLADRB1path, LRRC16Apath, SLC17A1path, PPP1R10path, LTApath, SLC44A4path, ZKSCAN3path, ZKSCAN12path, OR5T2path, SMTNL1path, CCDC15path, TMEM218path)
 
 ```
@@ -93,13 +93,13 @@ df <- as.data.frame(table(pathways))
 defining new df for diseases
 ```{r}
 diseasesdf<- (as.data.frame(table(unlist(strsplit(tolower(genedata$diseases), ",")))))
-write_xlsx(diseasesdf, "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/diseasesdf.xlsx")
+write_xlsx(diseasesdf, "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/diseasesdf.xlsx")
 ```
 
 REQUIRES USER INTERACTION
 open diseasesdf.xlsx; define new column "Immune"; if disease is autoimmune, put "1" in row; if not autoimmune, put "0" in row
 ```{r}
-diseasesdfnew <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/diseasesdfrevised.xlsx")
+diseasesdfnew <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/diseasesdfrevised.xlsx")
 ```
 
 calculating percent of autoimmune diseases in group
@@ -120,30 +120,106 @@ length(immune)/(length(immune)+length(nonimmune))
 importing data about Chr6 and cutting df to only include histocompatibility genes
 
 ```{r}
-chr6table <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/CHR6TABLE.xlsx")
+chr6table <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/CHR6TABLE.xlsx")
 
-chr6table <- chr6table[8:20,]
 chr6table$`Begin position in sequence` <- chr6table$`Begin position in sequence`/1000000
+
+row <- c(length(chr6table$`Begin position in sequence`):1)
+for (each in row){
+  if (!(grepl("Histone", chr6table$`Gene family`[each]))){
+    chr6table <- chr6table[-c(each),]
+  }
+}
+
+chr6table$endpos <- chr6table$`Begin position in sequence`+5
+
+histoSNP <- c()
+row <- c(1:length(chr6table$`Begin position in sequence`))
+for (each in chr6){
+  for (each2 in row){
+    if (each>= chr6table$`Begin position in sequence`[each2] && each <= chr6table$endpos[each2]){
+      histoSNP <- c(histoSNP, each)
+    }
+  }
+}
+histoSNP <- unique(histoSNP)
+
+nonhistoSNP <- c()
+for (each in chr6){
+  if (!(each %in% histoSNP)){
+    nonhistoSNP <- c(nonhistoSNP, each)
+  }
+}
+histoSNP <- sort(histoSNP)
+nonhistoSNP <- sort(nonhistoSNP)
+
 ```
 
 finding percent of chr6 SNPs that are in histocompatibility complex (assuming avg gene length of 10000 bps)
 ```{r}
-avglength <- 10
-histoSNP <- c()
-nonhistoSNP <- c()
-for (each in chr6){
-  if (each>=chr6table$`Begin position in sequence`[1] && each<=(chr6table$`Begin position in sequence`[length(chr6table$`Begin position in sequence`)]+avglength)){
-    histoSNP <- c(histoSNP, each)
-  } else {
-    nonhistoSNP <- c(nonhistoSNP, each)
-  }
-}
 
 histoSNP <- sort(histoSNP)
 nonhistoSNP <- sort(nonhistoSNP)
 
 length(histoSNP)/(length(nonhistoSNP)+length(histoSNP))
 ```
+
+
+```{r}
+# Define Ranges
+x <- IRanges(start=chr6table$`Begin position in sequence`, end=chr6table$endpos)
+names(x) <- chr6table$`Gene family`
+
+# x <- IRanges(start=chr6, end=chr6)
+# names(x) <- c(1:length(chr6))
+
+# Housekeeping - defining boundaries so graph looks nice
+sep=0.5
+height=0.5
+# Convert ranges to dataframe for ease of reference
+out <- as.data.frame(x)
+out$y <- disjointBins(x)
+out$ymin <- out$y * (sep + height) - height
+out$ymax <- out$ymin + height
+xmin <- min(out$start)
+xmax <- max(out$end)
+xbreaks <- seq(xmin - 1L, xmax + 1L)
+
+
+
+# Plot the ranges
+ggplot(out) + geom_rect(aes(ymin=ymin, ymax=ymax, xmin=start-0.5, xmax=end+0.5)) + geom_text(aes(x=start + width/2 - 0.5, y=ymin+(ymax-ymin)/2, label=names, angle=0), size=8, color="grey") + scale_x_continuous(breaks=xbreaks) + xlab("") + ylab("") + theme(axis.text.y=element_blank()) + theme(panel.grid.major=element_blank(), panel.grid.minor.y=element_blank(), axis.ticks=element_blank())
+
+ggplot(chr6SNP)+geom_point(aes(x=SNP, y=c(1:length(SNP))))+ ylab("") + theme(axis.text.y=element_blank()) + theme(axis.ticks=element_blank())
+
+
+  
+
+```
+
+
+
+```{r}
+# Libraries
+library(tidyverse)
+library(hrbrthemes)
+library(viridis)
+library(plotly)
+
+chr6 <- sort(chr6)
+diff <- length(chr6)-length(y)
+fill <- rep("0-0", diff)
+data <- data.frame("ranges"=c(y, fill), "SNPs"=chr6)
+data$rangefill <- c(1:length(data$ranges.start))
+
+
+plot(x=data$rangefill, y=data$SNPs, pch=1, col='black', xlim=c(0,length(chr6)), ylim=c(min(chr6)-2,max(chr6)+2), lwd=2.5)
+points(x=data$rangefill[1:length(y)], y=data$ranges.end[1:length(y)], pch=19)
+points(x=data$rangefill[1:length(y)], y=data$ranges.start[1:length(y)], pch=19)
+
+```
+
+
 adding data about which pathways are in each gene
 ```{r}
 vect <- c()
@@ -329,7 +405,7 @@ saving an excel sheet with word list and frequencies
 ```{r}
 library(writexl)
 finaldata$relfreq <- finaldata$Freq/max(finaldata$Freq)
-write_xlsx(finaldata, "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/finaldata.xlsx")
+write_xlsx(finaldata, "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/finaldata.xlsx")
 ```
 
 finding significant words and redefining data to only include these
@@ -361,7 +437,7 @@ finaldata <- finaldata[1:relevant,]
 REQUIRES USER INTERACTION
 open finaldata.xlsx; name new column "kept"; insert "1" for words to continue in analysis and "0" for words to omit from analysis; save file as finaldatarevised.xlsx
 ```{r}
-finaldatanew <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/finaldatarevised.xlsx")
+finaldatanew <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/finaldatarevised.xlsx")
 ```
 
 removing "0" words
@@ -408,7 +484,8 @@ ggplot(finaldatanew, color= station, fill='black', aes(x=Var1, y=Freq))+
 ```
 
 
+```{r}
 
-
+```
 
 

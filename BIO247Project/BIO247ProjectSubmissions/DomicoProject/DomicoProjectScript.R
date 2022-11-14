@@ -1,19 +1,20 @@
-
+###The dopamine hypothesis is outdated: A meta-analysis of the complexities in the biochemistry of schizophrenia; SCRIPT###
+###Author: Whitney Domico###
 
 ###importing data
 ##note: whatever order the articles are in here, they must be consistently in this order when pulling from columns
 
 library(readxl)
-PMC3077530_Data <- read.csv("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3077530_Data.txt", sep="", header = TRUE)
-PMC2775422_Data <- read.csv("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC2775422_Data.txt", sep="", header = TRUE)
-PMC3912837_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3912837_Data.xlsx",sheet = "Sheet2")
-PMC2890845_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC2890845_Data.xlsx")
-PMC4724864_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC4724864_Data.xlsx", skip = 1)
-PMC6927206_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC6927206_Data.xlsx", skip = 1)
-PMC3872086_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3872086_Data.xlsx", skip = 5)
-PMC4059435_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC4059435_Data.xlsx")
-PMC3905728_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3905728_Data.xlsx", sheet = "Sheet1")
-PMC3827979_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3827979_Data.xlsx")
+PMC3077530_Data <- read.csv("PMC3077530_Data.txt", sep="", header = TRUE)
+PMC2775422_Data <- read.csv("PMC2775422_Data.txt", sep="", header = TRUE)
+PMC3912837_Data <- read_excel("PMC3912837_Data.xlsx",sheet = "Sheet2")
+PMC2890845_Data <- read_excel("PMC2890845_Data.xlsx")
+PMC4724864_Data <- read_excel("PMC4724864_Data.xlsx", skip = 1)
+PMC6927206_Data <- read_excel("PMC6927206_Data.xlsx", skip = 1)
+PMC3872086_Data <- read_excel("PMC3872086_Data.xlsx", skip = 5)
+PMC4059435_Data <- read_excel("PMC4059435_Data.xlsx")
+PMC3905728_Data <- read_excel("PMC3905728_Data.xlsx", sheet = "Sheet1")
+PMC3827979_Data <- read_excel("PMC3827979_Data.xlsx")
 
 
 
@@ -191,19 +192,14 @@ tempdf4 <- setDT(InitialData)[,.(PMCID=paste(PMCID,collapse = ",")), by=SNP]
 MainData <- data.frame("SNP"= tempdf2$SNP, "Chr"=temp2, "Position.Mb"=temp3, "PMCID"=tempdf4$PMCID)
 
 
-##making unadjusted frequency graph
 
-library(ggplot2)
-ggplot(MainData)+geom_bar(aes(x=Chr))
-
-
-##making adjusted frequency graph (adjusting for differing lengths of chromosomes)
+##making relative frequency graph (adjusting for differing lengths of chromosomes)
 
 
 library(readxl)
 library(dplyr)
 library(ggplot2)
-ChrData <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/ChrData.xlsx")
+ChrData <- read_excel("ChrData.xlsx")
 
 
 ObsData <- as.data.frame(table(MainData$Chr))
@@ -263,6 +259,7 @@ for (each in row){
 print(over68)
 print(over95)
 
+##The chromosomes in vector 'over68' and 'over95' are relevant chromosomes, and you should use these while continuing. The relevant ones in the original dataset were 6, 11, and 22.
 
 ###statistical testing for chosen chrs
 
@@ -270,7 +267,7 @@ print(over95)
 
 ##cleaning data from NCBI Chr 6 Homology
 
-Chr6DataNCBI <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/Chr6DataNCBI.xlsx")
+Chr6DataNCBI <- read_excel("Chr6DataNCBI.xlsx")
 Chr6DataNCBI <- Chr6DataNCBI[,1:3]
 
 temp <- c()
@@ -373,7 +370,7 @@ Chr6Genes$potgenes6 <- potgenes6
 
 ###cleaning data from NCBI Chr 11 Homology 
 
-Chr11DataNCBI <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/Chr11DataNCBI.xlsx")
+Chr11DataNCBI <- read_excel("Chr11DataNCBI.xlsx")
 Chr11DataNCBI <- Chr11DataNCBI[,1:3]
 
 temp <- c()
@@ -478,7 +475,7 @@ Chr11Genes$potgenes11 <- potgenes11
 
 ##cleaning data from NCBI Chr 22 Homology 
 
-Chr22DataNCBI <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/Chr22DataNCBI.xlsx")
+Chr22DataNCBI <- read_excel("Chr22DataNCBI.xlsx")
 Chr22DataNCBI <- Chr22DataNCBI[,1:3]
 
 temp <- c()
@@ -617,7 +614,7 @@ genedata$SNP <- temp
 ##create excel file titled "NCBIGeneDescrData.xlsx"; create columns "gene" "officialsymbol" "fullname" "description" "pathways" "diseases"; for "gene" column, copy all genes from previous analysis; all columns, import data from NCBI into respective columns; leave pathways column blank
 
 
-NCBIGeneDescrData <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/NCBIGeneDescrData.xlsx")
+NCBIGeneDescrData <- read_excel("NCBIGeneDescrData.xlsx")
 
 genedata$officialsymbol <- NCBIGeneDescrData$officialsymbol
 genedata$fullname <- NCBIGeneDescrData$fullname
@@ -631,19 +628,19 @@ genedata$diseases <- NCBIGeneDescrData$diseases
 ##create excel file for each gene titled "GENENAMEpath.xlsx" with one column titled "pathways" and import all pathways into column
 
 library(readxl)
-BAT2path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/BAT2path.xlsx")
-HLADRB1path <- HLADRB1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/HLADRB1path.xlsx", sheet = "Sheet2")
-LRRC16Apath <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/LRRC16Apath.xlsx")
-SLC17A1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/SLC17A1path.xlsx")
-PPP1R10path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PPP1R10path.xlsx")
-LTApath <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/LTApath.xlsx")
-SLC44A4path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/SLC44A4path.xlsx")
-ZKSCAN3path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/ZKSCAN3path.xlsx")
-ZKSCAN12path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/ZKSCAN12path.xlsx")
-OR5T2path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/OR5T2path.xlsx")
-SMTNL1path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/SMTNL1path.xlsx")
-CCDC15path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/CCDC15path.xlsx")
-TMEM218path <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/TMEM218path.xlsx")
+BAT2path <- read_excel("BAT2path.xlsx")
+HLADRB1path <- HLADRB1path <- read_excel("HLADRB1path.xlsx", sheet = "Sheet2")
+LRRC16Apath <- read_excel("LRRC16Apath.xlsx")
+SLC17A1path <- read_excel("SLC17A1path.xlsx")
+PPP1R10path <- read_excel("PPP1R10path.xlsx")
+LTApath <- read_excel("LTApath.xlsx")
+SLC44A4path <- read_excel("SLC44A4path.xlsx")
+ZKSCAN3path <- read_excel("ZKSCAN3path.xlsx")
+ZKSCAN12path <- read_excel("ZKSCAN12path.xlsx")
+OR5T2path <- read_excel("OR5T2path.xlsx")
+SMTNL1path <- read_excel("SMTNL1path.xlsx")
+CCDC15path <- read_excel("CCDC15path.xlsx")
+TMEM218path <- read_excel("TMEM218path.xlsx")
 genedata$pathways <- c(BAT2path, HLADRB1path, LRRC16Apath, SLC17A1path, PPP1R10path, LTApath, SLC44A4path, ZKSCAN3path, ZKSCAN12path, OR5T2path, SMTNL1path, CCDC15path, TMEM218path)
 
 
@@ -665,15 +662,15 @@ df <- as.data.frame(table(pathways))
 
 
 ##defining new df for diseases
-
+library(writexl)
 diseasesdf<- (as.data.frame(table(unlist(strsplit(tolower(genedata$diseases), ",")))))
-write_xlsx(diseasesdf, "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/diseasesdf.xlsx")
+write_xlsx(diseasesdf, "diseasesdf.xlsx")
 
 
 ##REQUIRES USER INTERACTION
 ##open diseasesdf.xlsx; define new column "Immune"; if disease is autoimmune, put "1" in row; if not autoimmune, put "0" in row
 
-diseasesdfnew <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/diseasesdfrevised.xlsx")
+diseasesdfnew <- read_excel("diseasesdfrevised.xlsx")
 
 
 ##calculating percent of autoimmune diseases in group
@@ -692,31 +689,47 @@ for (each in row){
 length(immune)/(length(immune)+length(nonimmune))
 
 ##importing data about Chr6 and cutting df to only include histocompatibility genes
+##finding percent of chr6 SNPs that are in histocompatibility complex (assuming avg gene length of 5000 bps)
 
 
-chr6table <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/CHR6TABLE.xlsx")
+chr6table <- read_excel("CHR6TABLE.xlsx")
 
-chr6table <- chr6table[8:20,]
 chr6table$`Begin position in sequence` <- chr6table$`Begin position in sequence`/1000000
 
+row <- c(length(chr6table$`Begin position in sequence`):1)
+for (each in row){
+  if (!(grepl("Histone", chr6table$`Gene family`[each]))){
+    chr6table <- chr6table[-c(each),]
+  }
+}
 
-##finding percent of chr6 SNPs that are in histocompatibility complex (assuming avg gene length of 10000 bps)
+chr6table$endpos <- chr6table$`Begin position in sequence`+5
 
-avglength <- 10
 histoSNP <- c()
+row <- c(1:length(chr6table$`Begin position in sequence`))
+for (each in chr6){
+  for (each2 in row){
+    if (each>= chr6table$`Begin position in sequence`[each2] && each <= chr6table$endpos[each2]){
+      histoSNP <- c(histoSNP, each)
+    }
+  }
+}
+histoSNP <- unique(histoSNP)
+
 nonhistoSNP <- c()
 for (each in chr6){
-  if (each>=chr6table$`Begin position in sequence`[1] && each<=(chr6table$`Begin position in sequence`[length(chr6table$`Begin position in sequence`)]+avglength)){
-    histoSNP <- c(histoSNP, each)
-  } else {
+  if (!(each %in% histoSNP)){
     nonhistoSNP <- c(nonhistoSNP, each)
   }
 }
+
 
 histoSNP <- sort(histoSNP)
 nonhistoSNP <- sort(nonhistoSNP)
 
 length(histoSNP)/(length(nonhistoSNP)+length(histoSNP))
+
+
 
 ##adding data about which pathways are in each gene
 
@@ -902,7 +915,7 @@ finaldata <- finaldata[order(-finaldata$Freq),]
 
 library(writexl)
 finaldata$relfreq <- finaldata$Freq/max(finaldata$Freq)
-write_xlsx(finaldata, "C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/finaldata.xlsx")
+write_xlsx(finaldata, "finaldata.xlsx")
 
 
 ##finding significant words and redefining data to only include these
@@ -930,11 +943,12 @@ relevant <- length(over68)+length(over95)
 
 finaldata <- finaldata[1:relevant,]
 
+write_xlsx(finaldata, "finaldata.xlsx")
 
 ##REQUIRES USER INTERACTION
 ##open finaldata.xlsx; name new column "kept"; insert "1" for words to continue in analysis and "0" for words to omit from analysis; save file as finaldatarevised.xlsx
 
-finaldatanew <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/finaldatarevised.xlsx")
+finaldatanew <- read_excel("finaldatarevised.xlsx")
 
 
 ##removing "0" words
@@ -978,6 +992,7 @@ ggplot(finaldatanew, color= station, fill='black', aes(x=Var1, y=Freq))+
   geom_col(position='dodge')+
   ylab("Frequency")+
   xlab("Word")
+
 
 
 

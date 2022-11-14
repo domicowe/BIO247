@@ -13,16 +13,16 @@ knitr::opts_chunk$set(echo = TRUE)
 importing data from sources
 ```{r}
 library(readxl)
-PMC3077530_Data <- read.csv("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3077530_Data.txt", sep="", header = TRUE)
-PMC2775422_Data <- read.csv("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC2775422_Data.txt", sep="", header = TRUE)
-PMC3912837_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3912837_Data.xlsx",sheet = "Sheet2")
-PMC2890845_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC2890845_Data.xlsx")
-PMC4724864_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC4724864_Data.xlsx", skip = 1)
-PMC6927206_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC6927206_Data.xlsx", skip = 1)
-PMC3872086_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3872086_Data.xlsx", skip = 5)
-PMC4059435_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC4059435_Data.xlsx")
-PMC3905728_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3905728_Data.xlsx", sheet = "Sheet1")
-PMC3827979_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/PMC3827979_Data.xlsx")
+PMC3077530_Data <- read.csv("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/PMC3077530_Data.txt", sep="", header = TRUE)
+PMC2775422_Data <- read.csv("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/PMC2775422_Data.txt", sep="", header = TRUE)
+PMC3912837_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/PMC3912837_Data.xlsx",sheet = "Sheet2")
+PMC2890845_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/PMC2890845_Data.xlsx")
+PMC4724864_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/PMC4724864_Data.xlsx", skip = 1)
+PMC6927206_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/PMC6927206_Data.xlsx", skip = 1)
+PMC3872086_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/PMC3872086_Data.xlsx", skip = 5)
+PMC4059435_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/PMC4059435_Data.xlsx")
+PMC3905728_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/PMC3905728_Data.xlsx", sheet = "Sheet1")
+PMC3827979_Data <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/PMC3827979_Data.xlsx")
 ```
 
 
@@ -224,7 +224,7 @@ adjusted frequency graph
 library(readxl)
 library(dplyr)
 library(ggplot2)
-ChrData <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectArticles/ChrData.xlsx")
+ChrData <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/DomicoProject/ChrData.xlsx")
 
 
 ObsData <- as.data.frame(table(MainData$Chr))
