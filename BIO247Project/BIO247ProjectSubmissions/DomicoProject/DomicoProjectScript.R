@@ -1,7 +1,10 @@
 ###The dopamine hypothesis is outdated: A meta-analysis of the complexities in the biochemistry of schizophrenia; SCRIPT###
 ###Author: Whitney Domico###
 
-###importing data
+
+##DETAILED INSTRUCTIONS MAY BE FOUND AT https://github.com/domicowe/BIO247/tree/master/BIO247README UNDER "PROJECT_INSTRUCTIONS"
+
+##importing data
 ##note: whatever order the articles are in here, they must be consistently in this order when pulling from columns
 
 library(readxl)
@@ -18,7 +21,7 @@ PMC3827979_Data <- read_excel("PMC3827979_Data.xlsx")
 
 
 
-###data cleaning
+##data cleaning
 ##removing letters from end of PMC3077530$SNP data and combining with other data
 
 temp <- substr(PMC3077530_Data$SNP,1,nchar(PMC3077530_Data$SNP)-3)
@@ -142,7 +145,7 @@ for (each in temp6){
 
 
 
-###inserting PMCID columns for all data; defining PMCID
+##inserting PMCID columns for all data; defining PMCID
 
 PMC2890845_Data$PMCID <- c("PMC2890845")
 PMC3912837_Data$PMCID <- c("PMC3912837")
@@ -258,7 +261,7 @@ print(over95)
 
 ##The chromosomes in vector 'over68' and 'over95' are relevant chromosomes, and you should use these while continuing. The relevant ones in the original dataset were 6, 11, and 22.
 
-###statistical testing for chosen chrs
+##statistical testing for chosen chrs
 
 ##Chr6
 
@@ -365,7 +368,7 @@ Chr6Genes$potgenes6 <- potgenes6
 
 
 
-###cleaning data from NCBI Chr 11 Homology 
+##cleaning data from NCBI Chr 11 Homology 
 
 Chr11DataNCBI <- read_excel("Chr11DataNCBI.xlsx")
 Chr11DataNCBI <- Chr11DataNCBI[,1:3]
@@ -574,7 +577,7 @@ Chr22Genes <- data.frame(potSNP22)
 Chr22Genes$potgenes22 <- potgenes22
 
 
-###main analysis
+##main analysis
 ##adding chr data to gene data -- Chr22 has NO GENES and will be removed from now on
 
 Chr11Genes$chr <- 11
