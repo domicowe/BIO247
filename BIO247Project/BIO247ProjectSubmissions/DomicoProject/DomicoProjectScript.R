@@ -670,23 +670,28 @@ write_xlsx(diseasesdf, "diseasesdf.xlsx")
 ##REQUIRES USER INTERACTION
 ##open diseasesdf.xlsx; define new column "Immune"; if disease is autoimmune, put "1" in row; if not autoimmune, put "0" in row
 
-diseasesdfnew <- read_excel("diseasesdfrevised.xlsx")
+diseasesdf <- read_excel("diseasesdf.xlsx")
 
+if (ncol(diseasesdf) != 3){
+  stop("Please follow above instructions on how to revise diseasesdf")
+}
 
 ##calculating percent of autoimmune diseases in group
 
 immune <- c()
 nonimmune <- c()
-row <- 1:length(diseasesdfnew$Immune)
+row <- 1:length(diseasesdf$Immune)
 for (each in row){
-  if (diseasesdfnew$Immune[each]==1){
-    immune <- c(immune, diseasesdfnew$Var1[each])
+  if (diseasesdf$Immune[each]==1){
+    immune <- c(immune, diseasesdf$Var1[each])
+  } else if (diseasesdf$Immune[each]==0){
+    nonimmune <- c(nonimmune, diseasesdf$Var1[each])
   } else {
-    nonimmune <- c(nonimmune, diseasesdfnew$Var1[each])
+    stop("Digit present in diseasesdf that is not 0 or 1")
   }
 }
-
-length(immune)/(length(immune)+length(nonimmune))
+  
+  length(immune)/(length(immune)+length(nonimmune))
 
 ##importing data about Chr6 and cutting df to only include histocompatibility genes
 ##finding percent of chr6 SNPs that are in histocompatibility complex (assuming avg gene length of 5000 bps)
@@ -942,38 +947,47 @@ relevant <- length(over68)+length(over95)
 
 
 finaldata <- finaldata[1:relevant,]
+library(writexl)
 
 write_xlsx(finaldata, "finaldata.xlsx")
 
 ##REQUIRES USER INTERACTION
-##open finaldata.xlsx; name new column "kept"; insert "1" for words to continue in analysis and "0" for words to omit from analysis; save file as finaldatarevised.xlsx
+##open finaldata.xlsx; name new column "kept"; insert "1" for words to continue in analysis and "0" for words to omit from analysis; save file
 
-finaldatanew <- read_excel("finaldatarevised.xlsx")
+finaldata <- read_excel("finaldata.xlsx")
 
+if (ncol(finaldata)!=4){
+  stop("Please follow above instructions to add data to finaldata.xlsx")
+}
 
 ##removing "0" words
 
-row <- length(finaldatanew$kept):1
+row <- length(finaldata$kept):1
 
 for (each in row){
-  if (finaldatanew$kept[each] == 0){
-    finaldatanew <- finaldatanew[-c(each),]
+  if (finaldata$kept[each]!= 0 && finaldata$kept[each] != 1){
+    stop("Number present in finaldata.xlsx that is not 0 or 1")
   }
 }
 
+for (each in row){
+  if (finaldata$kept[each] == 0){
+    finaldata <- finaldata[-c(each),]
+  }
+}
 finaldata$numforgraph <- 1:length(finaldata$Var1)
 
 
 temp <- c()
 row <- 1:length(finaldata$Var1)
-for (each in finaldatanew$Var1){
+for (each in finaldata$Var1){
   for (each2 in row){
     if (each == finaldata$Var1[each2]){
       temp <- c(temp, finaldata$numforgraph[each2])
     }
   }
 }
-finaldatanew$numforgraph <- temp
+finaldata$numforgraph <- temp
 
 
 
@@ -988,7 +1002,7 @@ ggplot(finaldata, color= station, fill='black', aes(x=Var1, y=Freq))+
   xlab("Word")+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.25, hjust=1))
 
-ggplot(finaldatanew, color= station, fill='black', aes(x=Var1, y=Freq))+
+ggplot(finaldata, color= station, fill='black', aes(x=Var1, y=Freq))+
   geom_col(position='dodge')+
   ylab("Frequency")+
   xlab("Word")

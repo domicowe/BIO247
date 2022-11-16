@@ -9,7 +9,6 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-https://www.ncbi.nlm.nih.gov/projects/homology/maps/human/chr6/
 ```
 
 ```{r data, include=FALSE}

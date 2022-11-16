@@ -1,0 +1,149 @@
+---
+title: "FinalSequenceSort"
+author: "Whitney Domico"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+title: "Low_High_Mut_R"
+output: html_document
+date: "2022-10-31"
+---
+#uploading data and defining a column 
+```{r}
+SeqData <- read.table('Data/ACTG5257_RT_fasta.txt',header=FALSE,fill=TRUE) 
+WeekNumber <- SeqData$V1
+
+```
+
+INDEXING to clean up raw data
+
+```{r}
+idx <- c()
+#trying to move sequences for day0 and end day for each patient to a different dataframe
+#Loop comments
+#making sure the patient names are the same, the day for the row is 0 
+#making sure the indexed box is not empty or NA
+for(h in 1:length(SeqData$V1)){
+  if(SeqData$V5[h]==SeqData$V5[h+2] && SeqData$V8[h] == 0 && is.na(SeqData$V8[h])==FALSE && SeqData$V5[h]!= "" && SeqData$V8[h]!=SeqData$V8[h+2]){
+    #if all those conditions are met, the row number is indexed and saved in idx
+    idx <- append(idx, h)
+  }
+}
+  
+StartSeq<- SeqData$V1[idx+1]
+EndSeq <- SeqData$V1[idx+3]
+PTID <- SeqData$V5[idx]
+StartDayNumber <- SeqData$V8[idx]
+EndDayNumber <- SeqData$V8[idx+2]
+
+```
+
+Making a dataframe with the saved rows
+```{r}
+# making a dataframe with start and end FASTA data, patient ID, start week, and end week
+CompleteDF <- data.frame(StartSeq, EndSeq, PTID, StartDayNumber, EndDayNumber)
+```
+
+Removing periods before nucleotide sequences
+```{r}
+#sequences are flanked by periods. Script removes the periodas
+CompleteDF$StartSeq <- gsub("\\.","", CompleteDF$StartSeq)
+CompleteDF$EndSeq <- gsub("\\.","", CompleteDF$EndSeq)
+```
+
+Saving dataframe to a text file
+```{r}
+
+write.table(CompleteDF,'Data/DataForBLAST.csv', sep = ",")
+```
+
+!!!NOTE!!! Between these two steps, the data frame above was opened in excel and formatted as FASTA data again to run through the blast link below. The input for blast is named as FinalBlastInput. The output generated after running this file through blast is named as BLAST final alignment. 
+
+https://blast.ncbi.nlm.nih.gov/Blast.cgi?BLAST_SPEC=blast2seq&LINK_LOC=align2seq&PAGE_TYPE=BlastSearch 
+
+Uploading blast sequence data
+```{r}
+BLAST <- read.table('Data/BLASTFinalAlignment.csv', sep= ",")
+```
+
+```{r}
+# V1 <- c(BLAST$V1, "PT295")
+# V2 <- c(BLAST$V2, "PT75")
+# V3 <- c(BLAST$V3, 94.286)
+# V4 <- c(BLAST$V4, 630)
+# V5 <- c(BLAST$V5, 38)
+# V6 <- c(BLAST$V6, 0)
+# V7 <- c(BLAST$V7, 112)
+# V8 <- c(BLAST$V8, 741)
+# V9 <- c(BLAST$V9, 1)
+# V10 <- c(BLAST$V10, 630)
+# V11 <- c(BLAST$V11, 0)
+# V12 <- c(BLAST$V12, 970)
+# BLAST <- data.frame(V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12)
+
+
+# BLAST <- BLAST[-(1:100),]
+```
+
+
+Getting Blast sequences cleaned up 
+```{r}
+#code to save line numbers that have the same patient ID in both rows. 
+ydx<-c()
+for(z in 1:length(BLAST$V1)){
+  if(BLAST$V1[z]==BLAST$V2[z]){
+   ydx <- append(ydx,z) 
+  }
+}
+#creating vectors out of the indexed numbers to be used to make a dataframe.  
+PatientName <- BLAST$V1[ydx]
+SimilarityPct <- BLAST$V3[ydx]
+BPlength <- BLAST$V4[ydx]
+
+```
+
+Making comparison BLAST dataframe
+```{r}
+#making a dataframe with patient ID, percent similarity, base pair length, and the end day 
+BLASTCompare <- data.frame(PatientName, SimilarityPct, BPlength, EndDayNumber)
+```
+
+# reading treatment history data, cleaning data 
+```{r}
+TxHist <- read.table("Data/ACTG5257_Treat_history.txt", sep = "\t", header = TRUE)
+colnames(TxHist)[20] <- "3TC" # fix col name error 
+TxHist <- TxHist[,2:30]
+TxData <- read.csv("Data/TxData.csv") 
+# append drug type data to BLASTCompare 
+# drug type columns init 
+BLASTCompare$PI <- c(rep("0",241)) 
+BLASTCompare$NRTI <- c(rep("0",241)) 
+BLASTCompare$NNRTI <- c(rep("0",241)) 
+BLASTCompare$INI <- c(rep("0",241)) 
+BLASTCompare$INSTI <- c(rep("0",241)) 
+txNames <- colnames(TxHist) # find column names 
+for (x in 1:947) { 
+  for (y in 6:29) {
+      txNames[y] # get column name for this cell 
+    if (TxHist[x,y] == 1) {
+      rownum <- which(TxData$Code == txNames[y]) # get row number of this drug on TxData table 
+     # print(rownum)
+      txTypeIdx <- which(colnames(BLASTCompare) == TxData[rownum, 3]) # index of drug column on BLASTCompare 
+     # print(txTypeIdx)
+      patientrow <- which(BLASTCompare$PatientName == TxHist[x,1]) #index of this patient on BLASTCompare 
+      # print(patientrow)
+      BLASTCompare[patientrow, txTypeIdx] <- 1 # assign that patient to a "1" under the correct drug type on BLASTCompare 
+    }
+  }
+  }
+  
+  
+  
+```
+

@@ -110,9 +110,10 @@ row <- 1:length(diseasesdfnew$Immune)
 for (each in row){
   if (diseasesdfnew$Immune[each]==1){
     immune <- c(immune, diseasesdfnew$Var1[each])
-  } else {
+  } else if (diseasesdfnew$Immune[each]==0){
     nonimmune <- c(nonimmune, diseasesdfnew$Var1[each])
-  }
+  } else {
+    stop()
 }
 
 length(immune)/(length(immune)+length(nonimmune))
@@ -185,14 +186,26 @@ xmin <- min(out$start)
 xmax <- max(out$end)
 xbreaks <- seq(xmin - 1L, xmax + 1L)
 
+chr6 <- sort(chr6)
+diff <- length(chr6)-length(chr6table$`Begin position in sequence`)
+fill <- rep("0", diff)
+plotdf <- data.frame("start"=as.numeric(c(chr6table$`Begin position in sequence`,fill)) , "end"=as.numeric(c(chr6table$endpos, fill)))
+plotdf$y <- 1:length(plotdf$start)
+plotdf$ymin <- plotdf$y * (sep + height) - height
+plotdf$ymax <- plotdf$ymin + height
+xmin <- as.numeric(min(plotdf$start))
+xmax <- as.numeric(max(plotdf$end))
+xbreaks <- seq(xmin, round(xmax) + 1L)
+plotdf$SNP <- chr6
+
 
 
 # Plot the ranges
-ggplot(out) + geom_rect(aes(ymin=ymin, ymax=ymax, xmin=start-0.5, xmax=end+0.5)) + geom_text(aes(x=start + width/2 - 0.5, y=ymin+(ymax-ymin)/2, label=names, angle=0), size=8, color="grey") + scale_x_continuous(breaks=xbreaks) + xlab("") + ylab("") + theme(axis.text.y=element_blank()) + theme(panel.grid.major=element_blank(), panel.grid.minor.y=element_blank(), axis.ticks=element_blank())
+# ggplot(out) + geom_rect(aes(ymin=ymin, ymax=ymax, xmin=start-0.5, xmax=end+0.5)) + geom_text(aes(x=start + width/2 - 0.5, y=ymin+(ymax-ymin)/2, label=names, angle=0), size=8, color="grey") + scale_x_continuous(breaks=xbreaks) + xlab("") + ylab("") + theme(axis.text.y=element_blank()) + theme(panel.grid.major=element_blank(), panel.grid.minor.y=element_blank(), axis.ticks=element_blank())
+# 
+# ggplot(chr6SNP)+geom_point(aes(x=SNP, y=c(1:length(SNP))))+ ylab("") + theme(axis.text.y=element_blank()) + theme(axis.ticks=element_blank())
 
-ggplot(chr6SNP)+geom_point(aes(x=SNP, y=c(1:length(SNP))))+ ylab("") + theme(axis.text.y=element_blank()) + theme(axis.ticks=element_blank())
-
-
+ggplot(data) + geom_rect(aes(ymin=ymin[1], ymax=ymax[length(chr6table$`Begin position in sequence`)], xmin=start-0.5, xmax=end[length(chr6table$`Begin position in sequence`)]+0.5)) + geom_text(aes(x=start[length(chr6table$`Begin position in sequence`)] + width/2 - 0.5, y=ymin[length(chr6table$`Begin position in sequence`)]+(ymax[length(chr6table$`Begin position in sequence`)]-ymin[length(chr6table$`Begin position in sequence`)])/2, label=names, angle=0), size=8, color="grey") + scale_x_continuous(breaks=xbreaks) + xlab("") + ylab("") + theme(axis.text.y=element_blank()) + theme(panel.grid.major=element_blank(), panel.grid.minor.y=element_blank(), axis.ticks=element_blank())+geom_point(aes(x=SNP, y=c(1:length(SNP))))
   
 
 ```
@@ -485,7 +498,14 @@ ggplot(finaldatanew, color= station, fill='black', aes(x=Var1, y=Freq))+
 
 
 ```{r}
-
+graphs <- read_excel("C:/Users/Whitn/OneDrive/Desktop/BIO247/BIO247Project/BIO247ProjectSubmissions/graphs.xlsx",range = "h28:k76", col_names = FALSE)
 ```
+
+```{r}
+plot(graphs$...1, graphs$...4, ylab=("Chr6 Position (Mp)"), pch=1, col='black')
+lines(line1, line2, col='orange')
+lines(line1, line3, col='orange')
+```
+
 
 
