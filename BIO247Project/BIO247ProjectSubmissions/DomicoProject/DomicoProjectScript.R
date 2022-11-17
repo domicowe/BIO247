@@ -309,7 +309,6 @@ for (each in row){
 library(ggplot2)
 testdf <- data.frame("initial"= chr6)
 testdf$binnedchr6 <- cut(chr6, c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170))
-ggplot(testdf)+geom_bar(aes(x=binnedchr6))
 
 
 row <- c(1:length(MainData$SNP))
@@ -411,7 +410,6 @@ for (each in row){
 library(ggplot2)
 testdf <- data.frame("initial"= chr11)
 testdf$binnedchr11 <- cut(chr11, c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140))
-ggplot(testdf)+geom_bar(aes(x=binnedchr11))
 
 freqtable11 <- as.data.frame(table(testdf$binnedchr11))
 mean <- mean(freqtable11$Freq)
@@ -516,7 +514,6 @@ for (each in row){
 library(ggplot2)
 testdf <- data.frame("initial"= chr22)
 testdf$binnedchr22 <- cut(chr22, c(0, 10, 20, 30, 40, 50))
-ggplot(testdf)+geom_bar(aes(x=binnedchr22))
 
 freqtable22 <- as.data.frame(table(testdf$binnedchr22))
 mean <- mean(freqtable22$Freq)
@@ -873,20 +870,6 @@ df$genes <- temp7
 df$percent <- df$Freq/length(genedata$potgene)*100
 
 
-##adding plot for amounts of pathways that are present in certain percents of genes (pathways in only 1 gene have been ommitted)
-
-percents <- c()
-
-for (each in df$Freq){
-  if (each >1){
-    percents <- c(percents, each)
-  }
-}
-percents <- percents/length(genedata$potgene)*100
-percents <- as.data.frame(percents)
-
-ggplot(percents)+ geom_bar(aes(x=percents))
-
 
 ##finding common words in pathway titles
 
@@ -991,21 +974,17 @@ finaldata$numforgraph <- temp
 
 
 
-##plots for (1) counts of all significant words and (2) counts of all chosen words
+##plot for counts of all chosen words
 
 
 library(ggplot2)
+
 
 ggplot(finaldata, color= station, fill='black', aes(x=Var1, y=Freq))+
   geom_col(position='dodge')+
   ylab("Frequency")+
   xlab("Word")+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.25, hjust=1))
-
-ggplot(finaldata, color= station, fill='black', aes(x=Var1, y=Freq))+
-  geom_col(position='dodge')+
-  ylab("Frequency")+
-  xlab("Word")
 
 
 
