@@ -670,7 +670,7 @@ write_xlsx(diseasesdf, "diseasesdf.xlsx")
 diseasesdf <- read_excel("diseasesdf.xlsx")
 
 if (ncol(diseasesdf) != 3){
-  stop("Please follow above instructions on how to revise diseasesdf")
+  stop("User, please follow above instructions on how to revise diseasesdf.")
 }
 
 ##calculating percent of autoimmune diseases in group
@@ -684,7 +684,7 @@ for (each in row){
   } else if (diseasesdf$Immune[each]==0){
     nonimmune <- c(nonimmune, diseasesdf$Var1[each])
   } else {
-    stop("Digit present in diseasesdf that is not 0 or 1")
+    stop("Digit present in diseasesdf that is not 0 or 1. User, please revise.")
   }
 }
   
@@ -940,7 +940,7 @@ write_xlsx(finaldata, "finaldata.xlsx")
 finaldata <- read_excel("finaldata.xlsx")
 
 if (ncol(finaldata)!=4){
-  stop("Please follow above instructions to add data to finaldata.xlsx")
+  stop("User, please follow above instructions on how to revise finaldata.xlsx")
 }
 
 ##removing "0" words
@@ -949,7 +949,7 @@ row <- length(finaldata$kept):1
 
 for (each in row){
   if (finaldata$kept[each]!= 0 && finaldata$kept[each] != 1){
-    stop("Number present in finaldata.xlsx that is not 0 or 1")
+    stop("Number present in finaldata.xlsx that is not 0 or 1. User, please revise.")
   }
 }
 
